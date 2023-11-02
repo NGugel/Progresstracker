@@ -42,16 +42,21 @@
         <Button
             android:id="@+id/lernbutton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Lernen" />
+            android:text="Lernen"
+            android:background="@drawable/test_fruehlingsbild"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
 
         <Button
             android:id="@+id/freizeitbutton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Freizeit" />
+            android:text="Freizeit"
+            android:background="@drawable/test_sommerbild"
+            android:scaleType="centerCrop" />
 
     </LinearLayout>
 </RelativeLayout>
