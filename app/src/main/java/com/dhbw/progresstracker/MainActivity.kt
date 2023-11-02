@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
         }*/
         setContentView(R.layout.activity_main)
 
+        /* Hat schon mal funktioniert, aber zeigt den Text dann nicht mehr an aus unerklärlichen Gründen
         val displayMetrics = DisplayMetrics()
 
         //Wenn das Gerät mindestens Android 11 verwendet, dann wird die nicht veraltete Methode benutzt
@@ -56,6 +57,8 @@ class MainActivity : ComponentActivity() {
         val textViewFreizeitButton: TextView = findViewById(R.id.freizeitbutton)
         textViewFreizeitButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
 
+
+         */
 
         val lernbutton = findViewById<Button>(R.id.lernbutton)
         val freizeitbutton = findViewById<Button>(R.id.freizeitbutton)
