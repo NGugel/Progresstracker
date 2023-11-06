@@ -1,6 +1,7 @@
 package com.dhbw.progresstracker
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.hardware.display.DisplayManager
 import android.os.Build
@@ -17,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.dhbw.progresstracker.ui.theme.ProgresstrackerTheme
 import android.widget.Button
 import android.widget.TextView
+import com.dhbw.progresstracker.freizeit.FreizeitActivity
+import com.dhbw.progresstracker.lernen.LernenActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,15 +63,18 @@ class MainActivity : ComponentActivity() {
 
          */
 
+
         val lernbutton = findViewById<Button>(R.id.lernbutton)
         val freizeitbutton = findViewById<Button>(R.id.freizeitbutton)
 
         lernbutton.setOnClickListener {
             Log.d("MainActivity", "Hello World von Lernbutton!")
+            startActivity(Intent(this, LernenActivity::class.java))
         }
 
         freizeitbutton.setOnClickListener {
             Log.d("MainActivity", "Hello World von Freizeitbutton!")
+            startActivity(Intent(this, FreizeitActivity::class.java))
         }
         Log.d("MainActivity", "Hello World!")
     }

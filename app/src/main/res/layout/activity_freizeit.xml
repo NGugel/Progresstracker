@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/startseiteLayout"
+    android:id="@+id/freizeitLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".freizeit.FreizeitActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -14,7 +14,31 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/test_herbstbild" />
+        android:src="@drawable/test_sommerbild" />
+
+    <LinearLayout
+        android:id="@+id/zurueckbuttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:orientation="vertical"
+        tools:context=".freizeit.FreizeitActivity">
+
+        <Button
+            android:id="@+id/zurueckbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/test_herbstbild"
+            android:text="Zurück"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,37 +51,37 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".freizeit.FreizeitActivity">
 
         <TextView
-            android:id="@+id/startseiteTitel"
+            android:id="@+id/lernenTitel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Progresstracker"
+            android:text="Progresstracker \n > Freizeit"
+            android:textColor="@color/black"
             android:gravity="center"
             android:textSize="30dp"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:textStyle="bold" />
 
         <Button
-            android:id="@+id/lernbutton"
+            android:id="@+id/verwaltungsbutton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Lernen"
+            android:text="Verwaltungsmodus"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:background="@drawable/test_fruehlingsbild"
+            android:background="@drawable/test_herbstbild"
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp" />
 
         <Button
-            android:id="@+id/freizeitbutton"
+            android:id="@+id/anwendungsbutton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Freizeit"
+            android:text="Anwendungsmodus"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:background="@drawable/test_sommerbild"
