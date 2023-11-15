@@ -45,7 +45,6 @@
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:paddingTop="16dp"
@@ -56,36 +55,35 @@
         <TextView
             android:id="@+id/lernenTitel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
             android:text="Progresstracker \n > Freizeit"
             android:textColor="@color/black"
             android:gravity="center"
             android:textSize="30dp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/verwaltungsbutton"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Verwaltungsmodus"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:background="@drawable/test_herbstbild"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="16dp" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/anwendungsbutton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Anwendungsmodus"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:background="@drawable/test_sommerbild"
-            android:scaleType="centerCrop" />
+            <LinearLayout
+                android:id="@+id/buttonLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/addButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Add new Button"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:background="@drawable/test_sommerbild" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>
