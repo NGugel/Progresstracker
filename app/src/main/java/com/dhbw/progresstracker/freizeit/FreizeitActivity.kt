@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Button
 import android.widget.EditText
@@ -55,31 +56,6 @@ class FreizeitActivity : ComponentActivity() {
             val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
             layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
             newButton.setBackgroundResource(R.drawable.test_herbstbild)
-
-            // Swipe-Geste erkennen und Mülleimer-Icon anzeigen
-            val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
-                override fun onFling(
-                    e1: MotionEvent,
-                    e2: MotionEvent,
-                    velocityX: Float,
-                    velocityY: Float
-                ): Boolean {
-                    if (Math.abs(velocityX) > Math.abs(velocityY)) {
-                        if (velocityX < 0) {
-                            // Swipe nach links erkannt - Mülleimer-Icon anzeigen
-                            newButton.setCompoundDrawablesWithIntrinsicBounds(
-                                R.drawable.delete_icon,
-                                0,
-                                0,
-                                0
-                            )
-                            return true
-                        }
-                    }
-                    return false
-                }
-            })
-
             newButton.setOnClickListener {
                 // Aktion für den neuen Button hier definieren
                 Log.d("FreizeitActivity", buttonName.toString() )
@@ -101,6 +77,9 @@ class FreizeitActivity : ComponentActivity() {
         layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
         newButton.setBackgroundResource(R.drawable.test_herbstbild)
 
+        buttonLayout.addView(newButton, buttonLayout.childCount - 1)
+
+        //todo Listener auch bei anderer createMethode einbauen
         // OnTouchListener, um einen Swipe oder Touch zu erkennen
         newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
             override fun onSwipeLeft() {
@@ -126,52 +105,26 @@ class FreizeitActivity : ComponentActivity() {
             override fun onSwipeRight() {
                 // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Swiped right on button $buttonName")
+
+                // Button entfernen
+                deleteButton(newButton)
             }
             override fun onTouch() {
                 // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Touch/Click on button $buttonName")
-            }
-        })
+                val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
+                val allEntries: Map<String, *> = sharedPreferences.all
 
-        /*
-        // Swipe-Geste erkennen und Mülleimer-Icon anzeigen
-        val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onFling(
-                e1: MotionEvent,
-                e2: MotionEvent,
-                velocityX: Float,
-                velocityY: Float
-            ): Boolean {
-                if (Math.abs(velocityX) > Math.abs(velocityY)) {
-                    if (velocityX < 0) {
-                        // Swipe nach links erkannt - Mülleimer-Icon anzeigen
-                        newButton.setCompoundDrawablesWithIntrinsicBounds(
-                            R.drawable.delete_icon,
-                            0,
-                            0,
-                            0
-                        )
-                        return true
-                    }
+                for ((key, value) in allEntries) {
+                    Log.d("SharedPreferences", "$key: $value")
                 }
-                return false
             }
         })
 
-
-         */
-
-        /*
-        newButton.setOnClickListener {
-            // Aktion für den neuen Button hier definieren
-            Log.d("FreizeitActivity", buttonName.toString() )
-        }
-
-         */
-        buttonLayout.addView(newButton, buttonLayout.childCount - 1)
     }
 
     private fun showInputDialog(callback: (String) -> Unit) {
+        //todo abfrage nach duplicates machen und mit regex nach sinnvollen zeichenketten checken
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Namen der neuen Aktivität eingeben!")
 
@@ -217,6 +170,14 @@ class FreizeitActivity : ComponentActivity() {
         buttonNames?.forEach { buttonName ->
             createButton(buttonLayout, addButton.width, addButton.height, addButton.marginTop, buttonName.value.toString())
         }
+    }
+
+    private fun deleteButton(button: Button) {
+        (button.parent as ViewGroup).removeView(button)
+        val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove(button.text.toString())
+        editor.apply()
     }
 
     private fun getButtonNamesFromLayout(buttonLayout: LinearLayout): List<String> {
