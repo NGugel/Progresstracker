@@ -47,6 +47,7 @@ class FreizeitActivity : ComponentActivity() {
     private fun createButton(buttonLayout: LinearLayout, width: Int, height: Int, marginTop: Int) {
         showInputDialog { buttonName ->
             val newButton = Button(this)
+            newButton.isAllCaps = false
             newButton.text = buttonName
             newButton.typeface = Typeface.DEFAULT_BOLD
             newButton.layoutParams = LinearLayout.LayoutParams(
@@ -67,6 +68,7 @@ class FreizeitActivity : ComponentActivity() {
 
     private fun createButton(buttonLayout: LinearLayout, width: Int, height: Int, marginTop: Int, buttonName: String) {
         val newButton = Button(this)
+        newButton.isAllCaps = false
         newButton.text = buttonName
         newButton.typeface = Typeface.DEFAULT_BOLD
         newButton.layoutParams = LinearLayout.LayoutParams(
@@ -124,7 +126,6 @@ class FreizeitActivity : ComponentActivity() {
     }
 
     private fun showInputDialog(callback: (String) -> Unit) {
-        //todo abfrage nach duplicates machen und mit regex nach sinnvollen zeichenketten checken
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Namen der neuen Aktivität eingeben!")
 
@@ -133,7 +134,11 @@ class FreizeitActivity : ComponentActivity() {
 
         builder.setPositiveButton("OK") { _, _ ->
             val buttonName = input.text.toString()
-            callback(buttonName)
+            if (!isButtonSaved(buttonName)) {
+                callback(buttonName)
+            } else {
+                showInfoDialog("Dieser Name ist bereits vergeben!")
+            }
         }
 
         builder.setNegativeButton("Abbrechen") { dialog, _ ->
@@ -141,6 +146,18 @@ class FreizeitActivity : ComponentActivity() {
         }
 
         builder.show()
+    }
+
+    private fun showInfoDialog(message: String) {
+        val infoBuilder = AlertDialog.Builder(this)
+        infoBuilder.setMessage(message)
+        infoBuilder.setPositiveButton("OK", null)
+        infoBuilder.show()
+    }
+
+    private fun isButtonSaved(buttonName: String): Boolean {
+        val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.contains(buttonName)
     }
 
     private fun saveButton(buttonName: String) {
