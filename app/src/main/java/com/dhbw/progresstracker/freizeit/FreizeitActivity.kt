@@ -7,15 +7,12 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.marginTop
 import com.dhbw.progresstracker.MainActivity
 import com.dhbw.progresstracker.R
@@ -57,11 +54,34 @@ class FreizeitActivity : ComponentActivity() {
             val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
             layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
             newButton.setBackgroundResource(R.drawable.test_herbstbild)
-            newButton.setOnClickListener {
-                // Aktion für den neuen Button hier definieren
-                Log.d("FreizeitActivity", buttonName.toString() )
-            }
             buttonLayout.addView(newButton, buttonLayout.childCount - 1)
+
+            newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
+                override fun onSwipeLeft() {
+                    // Mülleimer-Icon anzeigen oder Aktion ausführen
+                    Log.d("FreizeitActivity", "Swiped left on button $buttonName")
+                    // Button editieren mit Confirmationfenster aufrufen
+                    showEditConfirmationDialog("Bitte geben Sie einen neuen Namen ein!", newButton, buttonLayout)
+                }
+                override fun onSwipeRight() {
+                    // Mülleimer-Icon anzeigen oder Aktion ausführen
+                    Log.d("FreizeitActivity", "Swiped right on button $buttonName")
+
+                    // Button entfernen mit Confirmationfenster aufrufen
+                    showDeleteConfirmationDialog("Möchten Sie den Button \"" + newButton.text.toString() + "\" wirklich löschen?", newButton)
+                }
+                override fun onTouch() {
+                    // Mülleimer-Icon anzeigen oder Aktion ausführen
+                    Log.d("FreizeitActivity", "Touch/Click on button $buttonName")
+                    val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
+                    val allEntries: Map<String, *> = sharedPreferences.all
+
+                    for ((key, value) in allEntries) {
+                        Log.d("SharedPreferences", "$key: $value")
+                    }
+                }
+            })
+
             saveButton(buttonName)
         }
     }
@@ -78,38 +98,21 @@ class FreizeitActivity : ComponentActivity() {
         val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
         layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
         newButton.setBackgroundResource(R.drawable.test_herbstbild)
-
         buttonLayout.addView(newButton, buttonLayout.childCount - 1)
 
-        //todo Listener auch bei anderer createMethode einbauen
-        // OnTouchListener, um einen Swipe oder Touch zu erkennen
         newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
             override fun onSwipeLeft() {
                 // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Swiped left on button $buttonName")
-
-                /*
-                // Swipe nach links erkannt - Mülleimer-Icon anzeigen
-                val deleteIcon = ContextCompat.getDrawable(this@FreizeitActivity, R.drawable.delete_icon)
-                deleteIcon?.setBounds(newButton.width - newButton.width / 4 - deleteIcon.intrinsicWidth, 0, newButton.width / 4, newButton.height * 3 / 4)
-                newButton.setCompoundDrawables(deleteIcon, null, null, null)
-
-                 */
-
-                /*
-                // Button rechts anzeigen
-                val layoutParams = newButton.layoutParams as RelativeLayout.LayoutParams
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END)
-                newButton.layoutParams = layoutParams
-
-                 */
+                // Button editieren mit Confirmationfenster aufrufen
+                showEditConfirmationDialog("Bitte geben Sie einen neuen Namen ein!", newButton, buttonLayout)
             }
             override fun onSwipeRight() {
                 // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Swiped right on button $buttonName")
 
-                // Button entfernen
-                deleteButton(newButton)
+                // Button entfernen mit Confirmationfenster aufrufen
+                showDeleteConfirmationDialog("Möchten Sie den Button \"" + newButton.text.toString() + "\" wirklich löschen?", newButton)
             }
             override fun onTouch() {
                 // Mülleimer-Icon anzeigen oder Aktion ausführen
@@ -155,6 +158,33 @@ class FreizeitActivity : ComponentActivity() {
         infoBuilder.show()
     }
 
+    private fun showDeleteConfirmationDialog(message: String, newButton: Button) {
+        val deleteBuilder = AlertDialog.Builder(this)
+        deleteBuilder.setMessage(message)
+        deleteBuilder.setPositiveButton("OK") { _, _ ->
+            deleteButton(newButton)
+        }
+        deleteBuilder.setNegativeButton("Abbrechen", null)
+        deleteBuilder.show()
+    }
+
+    private fun showEditConfirmationDialog(message: String, newButton: Button, buttonLayout: LinearLayout) {
+        val editBuilder = AlertDialog.Builder(this)
+        editBuilder.setTitle(message)
+        val input = EditText(this)
+        editBuilder.setView(input)
+        editBuilder.setPositiveButton("OK") { _, _ ->
+            val buttonName = input.text.toString()
+            if (!isButtonSaved(buttonName)) {
+                editButton(newButton, buttonName, buttonLayout)
+            } else {
+                showInfoDialog("Dieser Name ist bereits vergeben!")
+            }
+        }
+        editBuilder.setNegativeButton("Abbrechen", null)
+        editBuilder.show()
+    }
+
     private fun isButtonSaved(buttonName: String): Boolean {
         val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.contains(buttonName)
@@ -195,6 +225,23 @@ class FreizeitActivity : ComponentActivity() {
         val editor = sharedPreferences.edit()
         editor.remove(button.text.toString())
         editor.apply()
+    }
+
+    private fun editButton(button: Button, newButtonName: String, buttonLayout: LinearLayout) {
+        val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        // Entferne den alten Button aus der Ansicht
+        (button.parent as ViewGroup).removeView(button)
+
+        // Entferne den alten Button aus den SharedPreferences
+        editor.remove(button.text.toString())
+
+        // Speichere den neuen Button mit dem aktualisierten Namen in den SharedPreferences
+        editor.putString(newButtonName, newButtonName)
+        editor.apply()
+
+        // Erstelle einen neuen Button mit dem aktualisierten Namen und füge ihn der Ansicht hinzu
+        createButton(buttonLayout, button.width, button.height, button.marginTop, newButtonName)
     }
 
     private fun getButtonNamesFromLayout(buttonLayout: LinearLayout): List<String> {
