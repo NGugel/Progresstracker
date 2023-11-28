@@ -27,6 +27,8 @@
             android:name=".lernen.LernenActivity" />
         <activity
             android:name=".freizeit.FreizeitActivity" />
+        <activity
+            android:name=".freizeit.AktivitaetActivity" />
     </application>
 
 </manifest>

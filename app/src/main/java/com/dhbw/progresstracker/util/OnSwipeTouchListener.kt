@@ -22,7 +22,6 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
         private val SWIPE_VELOCITY_THRESHOLD = 10
 
         override fun onDown(e: MotionEvent): Boolean {
-            onTouch()
             return true
         }
 
@@ -42,6 +41,10 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
             }
 
             return false
+        }
+        override fun onSingleTapUp(e: MotionEvent): Boolean {
+            onTouch()
+            return super.onSingleTapUp(e)
         }
     }
 

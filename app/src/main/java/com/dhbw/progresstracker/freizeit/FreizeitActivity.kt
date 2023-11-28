@@ -79,11 +79,18 @@ class FreizeitActivity : ComponentActivity() {
                     for ((key, value) in allEntries) {
                         Log.d("SharedPreferences", "$key: $value")
                     }
+                    test(newButton)
                 }
             })
 
             saveButton(buttonName)
         }
+    }
+
+    private fun test(newButton: Button) {
+        val intent = Intent(this, AktivitaetActivity::class.java)
+        intent.putExtra(newButton.text.toString(), newButton.text.toString())
+        startActivity(intent)
     }
 
     private fun createButton(buttonLayout: LinearLayout, width: Int, height: Int, marginTop: Int, buttonName: String) {
@@ -123,6 +130,7 @@ class FreizeitActivity : ComponentActivity() {
                 for ((key, value) in allEntries) {
                     Log.d("SharedPreferences", "$key: $value")
                 }
+                test(newButton)
             }
         })
 
