@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lernenLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".lernen.LernenActivity">
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/zurueckbutton"
+        android:layout_width="122dp"
+        android:layout_height="68dp"
+        android:background="@drawable/test_herbstbild"
+        android:text="Zurück"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/verwaltungsTitel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Progresstracker \n > Lernen"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/zurueckbutton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKategorie"
+        android:layout_width="398dp"
+        android:layout_height="647dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="18dp"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/etKategorie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verwaltungsTitel"
+        tools:listitem="@layout/item_kategorie" />
+
+    <EditText
+        android:id="@+id/etKategorie"
+        android:layout_width="277dp"
+        android:layout_height="68dp"
+        android:hint="Neue Kategorie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddKategorie"
+        android:layout_width="128dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="6dp"
+        android:text="Hinzufügen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etKategorie" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

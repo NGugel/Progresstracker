@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Progresstracker</string>
+    <string name="hint_kategorie">Kategorie...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Kategorie not saved because it is empty.</string>
+    <string name="add_kategorie">Add Kategorie</string>
+    <string name="title_activity_new_kategorie">NewKategorieActivity</string>
 </resources>

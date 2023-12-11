@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import com.dhbw.progresstracker.MainActivity
 import com.dhbw.progresstracker.R
+import com.dhbw.progresstracker.lernen.Verwaltung.VerwaltungsModusActivity
 
 class LernenActivity : ComponentActivity() {
 
@@ -26,6 +27,7 @@ class LernenActivity : ComponentActivity() {
 
         verwaltungsbutton.setOnClickListener {
             Log.d("LernenActivity", "Hello World von Verwaltungsbutton!")
+            startActivity(Intent(this, VerwaltungsModusActivity::class.java))
         }
 
         anwendungsbutton.setOnClickListener {

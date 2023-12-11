@@ -25,7 +25,7 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
             return true
         }
 
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+        /*override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
             val distanceX = e2.x - e1.x
             val distanceY = e2.y - e1.y
 
@@ -42,6 +42,7 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
 
             return false
         }
+*/
         override fun onSingleTapUp(e: MotionEvent): Boolean {
             onTouch()
             return super.onSingleTapUp(e)
@@ -53,4 +54,5 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
     open fun onSwipeLeft() {}
 
     open fun onSwipeRight() {}
+
 }
