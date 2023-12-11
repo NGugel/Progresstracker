@@ -2,6 +2,7 @@ package com.dhbw.progresstracker.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.dhbw.progresstracker.repository.database.FrageDao
 import com.dhbw.progresstracker.repository.database.Kategorie
 import com.dhbw.progresstracker.repository.database.KategorieDao
 import com.dhbw.progresstracker.repository.database.LocalDatabase
@@ -12,10 +13,12 @@ import kotlinx.coroutines.withContext
 class AppRepository(application: Application, private val scope: CoroutineScope)
 {
     private val kategorieDao:KategorieDao
+    private val frageDao:FrageDao
 
     init {
         val db = LocalDatabase.createInstance(application, scope)
         kategorieDao  = db.kategorieDao
+        frageDao = db.frageDao
     }
 
     // implement all Methods:

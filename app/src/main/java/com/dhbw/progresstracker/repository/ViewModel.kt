@@ -1,16 +1,16 @@
-package com.dhbw.progresstracker.lernen.Verwaltung.Kategorie
+package com.dhbw.progresstracker.repository
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dhbw.progresstracker.repository.AppRepository
 import com.dhbw.progresstracker.repository.database.Kategorie
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-class KategorieViewModel(application: Application) : AndroidViewModel(application) {
+class ViewModel(application: Application) : AndroidViewModel(application) {
 
     //////////////////////////////////////////////////////////////////
     // Repository

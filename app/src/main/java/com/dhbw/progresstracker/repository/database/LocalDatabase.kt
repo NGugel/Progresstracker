@@ -8,15 +8,17 @@ import kotlinx.coroutines.CoroutineScope
 
 
 @Database(
-    entities = [Kategorie::class
+    entities = [Kategorie::class,
+                Frage::class
                ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 
 abstract class LocalDatabase:RoomDatabase() {
 
    abstract val kategorieDao: KategorieDao
+   abstract val frageDao: FrageDao
 
    companion object
    {

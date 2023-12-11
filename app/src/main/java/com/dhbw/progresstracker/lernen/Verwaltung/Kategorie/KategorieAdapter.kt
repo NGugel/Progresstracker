@@ -8,7 +8,8 @@ import com.dhbw.progresstracker.databinding.ItemKategorieBinding
 
 
 class KategorieAdapter(
-    var kategorien: ArrayList<Kategorie>
+    var kategorien: ArrayList<Kategorie>,
+    private val onItemClick: (Kategorie) -> Unit
 ) : RecyclerView.Adapter<KategorieAdapter.KategorieViewHolder>() {
     class KategorieViewHolder(val itemBinding: ItemKategorieBinding) :
         RecyclerView.ViewHolder(itemBinding.root)
@@ -21,8 +22,15 @@ class KategorieAdapter(
     }
 
     override fun onBindViewHolder(holder: KategorieViewHolder, position: Int) {
+
         holder.itemBinding.apply {
             tvTitel.text = kategorien[position].titel
+
+
+            tvTitel.setOnClickListener {
+                // Rufe die onItemClick-Funktion nur auf, wenn der Button geklickt wurde
+                onItemClick(kategorien[position])
+            }
         }
     }
 

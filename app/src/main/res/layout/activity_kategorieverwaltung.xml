@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/verwaltungLayout"
+    android:id="@+id/lernenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -22,19 +22,19 @@
         android:background="@drawable/ic_back"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/verwaltungsTitel"
+        app:layout_constraintEnd_toStartOf="@+id/kategorieVerwaltungsTitel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/verwaltungsTitel"
+        android:id="@+id/kategorieVerwaltungsTitel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:text="Progresstracker \n > Lernen"
+        android:text="Lernen \n > "
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -42,8 +42,28 @@
         app:layout_constraintStart_toEndOf="@+id/zurueckbutton"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_RenameKategorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Umbenennen"
+        app:layout_constraintEnd_toStartOf="@+id/btn_DeleteKategorie"
+        app:layout_constraintTop_toTopOf="@+id/btn_DeleteKategorie" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_DeleteKategorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#F44336"
+        android:text="Löschen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kategorieVerwaltungsTitel" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvKategorie"
+        android:id="@+id/rvFragen"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -55,16 +75,15 @@
         android:overScrollMode="never"
         android:padding="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddKategorie"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddFrage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verwaltungsTitel"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_kategorie" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_RenameKategorie"
+        tools:listitem="@layout/item_frage" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btnAddKategorie"
+        android:id="@+id/btnAddFrage"
         android:contentDescription="Hier kann man eine Neue Kategorie hinzufügen"
         android:hint="Kategorie anlegen"
         android:layout_width="60dp"

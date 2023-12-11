@@ -27,10 +27,12 @@
         </activity>
         <activity android:name=".lernen.LernenActivity" />
         <activity android:name=".lernen.Verwaltung.VerwaltungsModusActivity"
-                android:theme="@style/AppTheme"/>
+                     android:theme="@style/AppTheme"/>
         <activity android:name=".freizeit.FreizeitActivity" />
         <activity
             android:name=".freizeit.AktivitaetActivity" />
+        <activity android:name=".lernen.Verwaltung.Kategorie.KategorieVerwaltungActivity"
+                    android:theme="@style/AppTheme"/>/>
     </application>
 
 </manifest>

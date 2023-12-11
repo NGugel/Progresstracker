@@ -1,9 +1,9 @@
-package com.dhbw.progresstracker.lernen.Verwaltung.Kategorie
+package com.dhbw.progresstracker.repository
 
 import androidx.lifecycle.ViewModelProvider
 import android.app.Application
 
-class KategorieViewModelFactory(application: Application) :
+class ViewModelFactory(application: Application) :
     ViewModelProvider.AndroidViewModelFactory(application) {
 
 }
