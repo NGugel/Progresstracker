@@ -79,7 +79,7 @@ class FreizeitActivity : ComponentActivity() {
                     for ((key, value) in allEntries) {
                         Log.d("SharedPreferences", "$key: $value")
                     }
-                    test(newButton)
+                    giveExtraInformationToDynamicScreen(newButton)
                 }
             })
 
@@ -87,7 +87,7 @@ class FreizeitActivity : ComponentActivity() {
         }
     }
 
-    private fun test(newButton: Button) {
+    private fun giveExtraInformationToDynamicScreen(newButton: Button) {
         val intent = Intent(this, AktivitaetActivity::class.java)
         intent.putExtra(newButton.text.toString(), newButton.text.toString())
         startActivity(intent)
@@ -130,7 +130,7 @@ class FreizeitActivity : ComponentActivity() {
                 for ((key, value) in allEntries) {
                     Log.d("SharedPreferences", "$key: $value")
                 }
-                test(newButton)
+                giveExtraInformationToDynamicScreen(newButton)
             }
         })
 

@@ -53,7 +53,7 @@
         tools:context=".freizeit.AktivitaetActivity">
 
         <TextView
-            android:id="@+id/lernenTitel"
+            android:id="@+id/aktivitaetTitel"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_alignParentTop="true"
