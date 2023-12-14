@@ -1,15 +1,19 @@
 package com.dhbw.progresstracker.lernen.Verwaltung.Kategorie
 
+import MultipleChoiceFragment
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.databinding.DialogKategorieinputBinding
 import com.google.android.material.textfield.TextInputLayout
@@ -50,7 +54,48 @@ class FrageDialogInput : DialogFragment() {
         setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
 
         _binding = DialogFrageinputBinding.inflate(inflater, container, false)
+
+        val spinnerFrageTyp: Spinner = binding.spinnerFrageTyp
+
+        spinnerFrageTyp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // Basierend auf der ausgewählten Option die notwendigen Felder hinzufügen
+                when (position) {
+                    0 -> {
+                        showFragment(MultipleChoiceFragment())
+                        Log.d("VerwaltenActivity", "Hello World von showFragment aka Spinner 0 Selected!")
+
+
+                    }
+                    1 -> {
+                        // Zeige Felder für Frei formulierbare Antwort an
+                        // Beispiel: Dynamisch Views hinzufügen
+                        Log.d("VerwaltenActivity", "Hello World von showFragment aka Spinner 1 Selected!")
+                    }
+                    // Weitere Cases für andere Fragetypen hinzufügen
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Handle when nothing is selected
+            }
+        }
+
+
         return binding.root
+
+
+    }
+
+    private fun showFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,16 +105,6 @@ class FrageDialogInput : DialogFragment() {
             ViewModelFactory(requireActivity().application)
         ).get(ViewModel::class.java)
 
-        binding.dialogBtnSpeichern.setOnClickListener {
-            // Aktion bei Klick auf den Speichern-Button
-           // saveData()
-            // Hier kannst du den Benutzereingabe-Wert verwenden
-        }
-
-        binding.dialogBtnAbbrechen.setOnClickListener {
-            // Aktion bei Klick auf den Abbrechen-Button
-            dismiss() // Schließe den Dialog
-        }
     }
 /*
     private fun saveData() {

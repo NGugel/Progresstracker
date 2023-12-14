@@ -1,0 +1,14 @@
+<resources>
+    <array name="frage_typen">
+        <item>Multiple Choice</item>
+        <item>Freitext</item>
+        <item>Lückentext</item>
+    </array>
+
+    <array name="antworten">
+        <item>Antwort A</item>
+        <item>Antwort B</item>
+        <item>Antwort C</item>
+        <item>Antwort D</item>
+    </array>
+</resources>

@@ -6,12 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.coroutines.CoroutineScope
 
+/*WICHTIG!!!
+    Wenn IRGENDWAS an der Datenstruktur der Datenbank geändert wird. Muss die Version
+    inkrementiert werden bei @Database
+ */
 
 @Database(
     entities = [Kategorie::class,
                 Frage::class
                ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 

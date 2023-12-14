@@ -24,7 +24,7 @@ class FrageAdapter(
     override fun onBindViewHolder(holder: FrageViewHolder, position: Int) {
 
         holder.itemBinding.apply {
-            tvFrage.text = fragen[position].text
+            tvFrage.text = fragen[position].frage
 
 
             tvFrage.setOnClickListener {
