@@ -2,6 +2,7 @@ package com.dhbw.progresstracker.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.dhbw.progresstracker.repository.database.Frage
 import com.dhbw.progresstracker.repository.database.FrageDao
 import com.dhbw.progresstracker.repository.database.Kategorie
 import com.dhbw.progresstracker.repository.database.KategorieDao
@@ -68,4 +69,35 @@ class AppRepository(application: Application, private val scope: CoroutineScope)
     }
 
     fun getLiveDataKategorien(): LiveData<List<Kategorie>> =  kategorieDao.getLiveDataKategorienList()
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //Frage
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    suspend fun insertFrage(frage: Frage)
+    {
+        withContext(Dispatchers.IO)
+        {
+            frageDao.insertFrage(frage)
+        }
+    }
+
+    suspend fun updateFrage(frage: Frage)
+    {
+        withContext(Dispatchers.IO)
+        {
+            frageDao.updateFrage(frage)
+        }
+    }
+
+    suspend fun deleteFrage(frage: Frage)
+    {
+        withContext(Dispatchers.IO)
+        {
+            frageDao.deleteFrage(frage)
+        }
+    }
+
+    fun getLiveDataFragen(kategorieId: Int): LiveData<List<Frage>> =  frageDao.getLiveDataFragenForKategorie(kategorieId)
+
 }

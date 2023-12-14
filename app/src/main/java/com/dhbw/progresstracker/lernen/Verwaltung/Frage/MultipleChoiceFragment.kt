@@ -1,4 +1,5 @@
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,12 @@ import com.google.android.material.textfield.TextInputLayout
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.DialogFrageinputBinding
 import com.dhbw.progresstracker.databinding.FragmentMultiplechoiceBinding
+import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.FrageDialogInput
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
+import com.dhbw.progresstracker.repository.database.Frage
+import com.dhbw.progresstracker.repository.database.Fragetyp
+import com.dhbw.progresstracker.repository.database.Kategorie
 
 class MultipleChoiceFragment : Fragment() {
 
@@ -33,11 +38,26 @@ class MultipleChoiceFragment : Fragment() {
 
     private lateinit var viewModel: ViewModel
 
+    companion object {
+        const val EXTRA_KATEGORIE = "extra_kategorie"
+    }
+
+    var empfangeneKategorieId: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+        arguments?.let {
+            empfangeneKategorieId = it.getInt(EXTRA_KATEGORIE)
+
+            Log.d("MultipleChooiceFragment", "Hello World von MultipleChoiceFragment die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
+            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
+            // ...
+        }
 
         _binding = FragmentMultiplechoiceBinding.inflate(inflater, container, false)
 
@@ -49,7 +69,6 @@ class MultipleChoiceFragment : Fragment() {
         //answerDEditText = view.findViewById(R.id.etAntwortD)
         //spinner = view.findViewById(R.id.spinner)
         btnSave = binding.btnSpeichern
-        btnCancel = binding.btnCancel
 
         // Setze Spinner-Adapter mit den Antwortmöglichkeiten
         val answers = resources.getStringArray(R.array.antworten)
@@ -58,51 +77,64 @@ class MultipleChoiceFragment : Fragment() {
        // spinner.adapter = adapter
 
         // Setze Click-Listener für die Buttons
-        btnSave.setOnClickListener {
-            saveData()
-        }
 
-        btnCancel.setOnClickListener {
-            // Füge hier die Aktion für den Abbrechen-Button ein
-        }
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(
             requireActivity(),
             ViewModelFactory(requireActivity().application)
         ).get(ViewModel::class.java)
 
-
-
-        binding.btnCancel.setOnClickListener {
-            // Aktion bei Klick auf den Abbrechen-Button
-            //dismiss() // Schließe den Dialog
+        btnSave.setOnClickListener {
+            saveData()
         }
+
+        arguments?.let {
+            empfangeneKategorieId = it.getInt(EXTRA_KATEGORIE)
+
+            Log.d("MultipleChoiceFragment", "Hello World von MultipleChoiceFragment die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
+            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
+            // ...
+        }
+
     }
 
     private fun saveData() {
-        // Validiere die Eingaben und führe entsprechende Aktionen durch
-        val question = questionEditText.text.toString()
-        val answerA = answerAEditText.text.toString()
-        val answerB = answerBEditText.text.toString()
-        val answerC = answerCEditText.text.toString()
-        val answerD = answerDEditText.text.toString()
-        val correctAnswer = spinner.selectedItem.toString()
+        val frage = binding.textInputLayout.editText?.text.toString()
+        val antwortA = binding.etAntwortA.editText?.text.toString()
+        val antwortB = binding.etAntwortB.editText?.text.toString()
+        val antwortC = binding.etAntwortC.editText?.text.toString()
+        val antwortD = binding.etAntwortD.editText?.text.toString()
+        var korrekteAntwort: String
 
-        // Füge hier die Logik zum Speichern der Daten ein
+        //Korrekte Antwort
+        if(binding.spinner.selectedItemPosition == 0)
+        {
+            korrekteAntwort = antwortA
+        }
+        if(binding.spinner.selectedItemPosition == 1)
+        {
+            korrekteAntwort = antwortB
+        }
+        if(binding.spinner.selectedItemPosition == 2)
+        {
+            korrekteAntwort = antwortC
+        }else { korrekteAntwort = antwortD}
 
-        // Beispiel: Zeige eine Toast-Nachricht mit den eingegebenen Daten an
-        val message = "Frage: $question\n" +
-                "Antwort A: $answerA\n" +
-                "Antwort B: $answerB\n" +
-                "Antwort C: $answerC\n" +
-                "Antwort D: $answerD\n" +
-                "Richtige Antwort: $correctAnswer"
 
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        if (frage.isEmpty() || antwortA.isEmpty() || antwortB.isEmpty() || antwortC.isEmpty() || antwortD.isEmpty()) {
+            // Zeige Toast-Meldung für leere Felder
+            Toast.makeText(requireContext(), "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show()
+        } else {
+            // Hier kannst du die nicht-leeren Eingaben verwenden und speichern
+            viewModel.insertFrage(empfangeneKategorieId, frage, antwortA, antwortB, antwortC, antwortD, korrekteAntwort, Fragetyp.MULTIPLE_CHOICE)
+            Toast.makeText(requireContext(), "Frage wurde erfolgreich gespeichert", Toast.LENGTH_SHORT).show()
+            Log.d("SaveFrage", "Hello World Save Frage:  ${empfangeneKategorieId} und ${frage} ${antwortA}! und ${korrekteAntwort} korrekte An und ${Fragetyp.MULTIPLE_CHOICE}")
+        }
     }
 }

@@ -21,6 +21,7 @@ import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.DialogFrageinputBinding
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
+import com.dhbw.progresstracker.repository.database.Kategorie
 
 class FrageDialogInput : DialogFragment() {
     private lateinit var rootView: View
@@ -37,12 +38,16 @@ class FrageDialogInput : DialogFragment() {
     private var _binding: DialogFrageinputBinding? = null
     private val binding get() = _binding!!
 
+    companion object {
+        const val EXTRA_KATEGORIE = "extra_kategorie"
+    }
+
+    var empfangeneKategorieId: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
-
-
 
     }
 
@@ -52,6 +57,14 @@ class FrageDialogInput : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
+
+        arguments?.let {
+            empfangeneKategorieId = it.getInt(EXTRA_KATEGORIE)
+
+            Log.d("FrageDialogInput", "Hello World von FrageDialgInput die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
+            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
+            // ...
+        }
 
         _binding = DialogFrageinputBinding.inflate(inflater, container, false)
 
@@ -67,7 +80,14 @@ class FrageDialogInput : DialogFragment() {
                 // Basierend auf der ausgewählten Option die notwendigen Felder hinzufügen
                 when (position) {
                     0 -> {
-                        showFragment(MultipleChoiceFragment())
+                        val multipleChoiceFragment = MultipleChoiceFragment()
+
+
+                        val bundle = Bundle()
+                        bundle.putInt(EXTRA_KATEGORIE, empfangeneKategorieId)
+                        multipleChoiceFragment.arguments = bundle
+
+                        showFragment(multipleChoiceFragment)
                         Log.d("VerwaltenActivity", "Hello World von showFragment aka Spinner 0 Selected!")
 
 
@@ -93,6 +113,7 @@ class FrageDialogInput : DialogFragment() {
     }
 
     private fun showFragment(fragment: Fragment) {
+
         childFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
@@ -100,10 +121,16 @@ class FrageDialogInput : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         viewModel = ViewModelProvider(
             requireActivity(),
             ViewModelFactory(requireActivity().application)
         ).get(ViewModel::class.java)
+
+        binding.btnClose.setOnClickListener() {
+            dismiss()
+        }
 
     }
 /*
