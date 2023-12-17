@@ -56,7 +56,7 @@ class KategorieVerwaltungActivity : AppCompatActivity() {
 
         // Trigger the filtering by calling getLiveDataFragenByKategorie with the desired kategorieId
         val kategorieId = empfangeneKategorie!!.id
-            viewModel.getLiveDataFragenByKategorie(kategorieId)
+        viewModel.getLiveDataFragenByKategorie(kategorieId)
 
 
         val btnAddFrage = findViewById<ImageButton>(R.id.btnAddFrage)

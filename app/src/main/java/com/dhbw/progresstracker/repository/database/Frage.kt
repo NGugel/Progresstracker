@@ -22,6 +22,7 @@ data class Frage(
     val antwortB: String? = null,
     val antwortC: String? = null,
     val antwortD: String? = null,
+    val fehlerAntwort: String? = null,
     val korrekteAntwort: String,  // Hier könnte die korrekte Antwort für andere Typen sein
     val fragetyp: Fragetyp,
 
@@ -32,6 +33,6 @@ data class Frage(
 enum class Fragetyp {
     MULTIPLE_CHOICE,
     FREITEXT,
-    LUECKENTEXT
+    FEHLERTEXT
     // Weitere Fragetypen hier hinzufügen, falls erforderlich
 }

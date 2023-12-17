@@ -2,7 +2,7 @@
     <array name="frage_typen">
         <item>Multiple Choice</item>
         <item>Freitext</item>
-        <item>Lückentext</item>
+        <item>Fehlertext</item>
     </array>
 
     <array name="antworten">

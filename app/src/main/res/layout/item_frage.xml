@@ -19,6 +19,7 @@
         android:backgroundTint="@android:color/transparent"
         android:outlineProvider="background"
         android:text="frage"
+        android:textAllCaps="false"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

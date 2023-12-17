@@ -19,6 +19,8 @@ import com.dhbw.progresstracker.databinding.DialogKategorieinputBinding
 import com.google.android.material.textfield.TextInputLayout
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.DialogFrageinputBinding
+import com.dhbw.progresstracker.lernen.Verwaltung.Frage.FehlertextFragment
+import com.dhbw.progresstracker.lernen.Verwaltung.Frage.FreitextFragment
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
 import com.dhbw.progresstracker.repository.database.Kategorie
@@ -82,20 +84,34 @@ class FrageDialogInput : DialogFragment() {
                     0 -> {
                         val multipleChoiceFragment = MultipleChoiceFragment()
 
-
                         val bundle = Bundle()
                         bundle.putInt(EXTRA_KATEGORIE, empfangeneKategorieId)
                         multipleChoiceFragment.arguments = bundle
 
                         showFragment(multipleChoiceFragment)
-                        Log.d("VerwaltenActivity", "Hello World von showFragment aka Spinner 0 Selected!")
+                        Log.d("FrageDialogInput", "Hello World von showFragment, Spinner 0 Selected! == MultipleChoice")
 
 
                     }
                     1 -> {
-                        // Zeige Felder für Frei formulierbare Antwort an
-                        // Beispiel: Dynamisch Views hinzufügen
-                        Log.d("VerwaltenActivity", "Hello World von showFragment aka Spinner 1 Selected!")
+                        val freitextFragment = FreitextFragment()
+
+                        val bundle = Bundle()
+                        bundle.putInt(EXTRA_KATEGORIE, empfangeneKategorieId)
+                        freitextFragment.arguments = bundle
+
+                        showFragment(freitextFragment)
+                        Log.d("FrageDialogInput", "Hello World von showFragment,Spinner 1 Selected! == Freitext")
+                    }
+                    2 -> {
+                        val fehlertextFragment = FehlertextFragment()
+
+                        val bundle = Bundle()
+                        bundle.putInt(EXTRA_KATEGORIE, empfangeneKategorieId)
+                        fehlertextFragment.arguments = bundle
+
+                        showFragment(fehlertextFragment)
+                        Log.d("VerwaltenActivity", "Hello World von showFragment,Spinner 2 Selected! == Fehlertext")
                     }
                     // Weitere Cases für andere Fragetypen hinzufügen
                 }

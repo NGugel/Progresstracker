@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
-
 }
 
 
@@ -116,8 +115,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
-
-
     implementation("androidx.appcompat:appcompat:1.6.1")
+
+    // Richtext Editor
+    implementation("jp.wasabeef:richeditor-android:2.0.0")
 }
 

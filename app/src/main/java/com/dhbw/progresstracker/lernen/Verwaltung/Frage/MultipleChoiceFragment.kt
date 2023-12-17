@@ -105,7 +105,7 @@ class MultipleChoiceFragment : Fragment() {
     }
 
     private fun saveData() {
-        val frage = binding.textInputLayout.editText?.text.toString()
+        val frage = binding.etFrageMultipleChoice.editText?.text.toString()
         val antwortA = binding.etAntwortA.editText?.text.toString()
         val antwortB = binding.etAntwortB.editText?.text.toString()
         val antwortC = binding.etAntwortC.editText?.text.toString()
@@ -132,7 +132,7 @@ class MultipleChoiceFragment : Fragment() {
             Toast.makeText(requireContext(), "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show()
         } else {
             // Hier kannst du die nicht-leeren Eingaben verwenden und speichern
-            viewModel.insertFrage(empfangeneKategorieId, frage, antwortA, antwortB, antwortC, antwortD, korrekteAntwort, Fragetyp.MULTIPLE_CHOICE)
+            viewModel.insertFrage(empfangeneKategorieId, frage, antwortA, antwortB, antwortC, antwortD,null, korrekteAntwort, Fragetyp.MULTIPLE_CHOICE)
             Toast.makeText(requireContext(), "Frage wurde erfolgreich gespeichert", Toast.LENGTH_SHORT).show()
             Log.d("SaveFrage", "Hello World Save Frage:  ${empfangeneKategorieId} und ${frage} ${antwortA}! und ${korrekteAntwort} korrekte An und ${Fragetyp.MULTIPLE_CHOICE}")
         }

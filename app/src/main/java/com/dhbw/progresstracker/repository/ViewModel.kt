@@ -71,9 +71,9 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     //Frage
     ////////////////////////////////////////////////////////
 
-    fun insertFrage(kategorieId: Int, question: String, antwortA: String?, antwortB: String?, antwortC: String?, antwortD: String?, korrekteAntwort: String, fragetyp: Fragetyp ) {
+    fun insertFrage(kategorieId: Int, question: String, antwortA: String?, antwortB: String?, antwortC: String?, antwortD: String?,fehlerAntwort: String?, korrekteAntwort: String, fragetyp: Fragetyp ) {
         viewModelScope.launch {
-            val frage = Frage(kategorieId, question, antwortA, antwortB, antwortC, antwortD, korrekteAntwort, fragetyp)
+            val frage = Frage(kategorieId, question, antwortA, antwortB, antwortC, antwortD,fehlerAntwort, korrekteAntwort, fragetyp)
             repository.insertFrage(frage)
         }
 
