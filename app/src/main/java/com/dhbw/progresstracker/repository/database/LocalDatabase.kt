@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
     entities = [Kategorie::class,
                 Frage::class
                ],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 

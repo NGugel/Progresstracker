@@ -94,14 +94,6 @@ class MultipleChoiceFragment : Fragment() {
             saveData()
         }
 
-        arguments?.let {
-            empfangeneKategorieId = it.getInt(EXTRA_KATEGORIE)
-
-            Log.d("MultipleChoiceFragment", "Hello World von MultipleChoiceFragment die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
-            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
-            // ...
-        }
-
     }
 
     private fun saveData() {

@@ -71,6 +71,19 @@ class KategorieVerwaltungActivity : AppCompatActivity() {
             frageDialog.show(supportFragmentManager, "Neue Frage")
         }
 
+        val btnEditKategorie = findViewById<Button>(R.id.btn_RenameKategorie)
+        btnEditKategorie.setOnClickListener {
+            Log.d("KategorieVerwaltenActivity", "Hello World von btnEditFrage!")
+            val kategorieEditDialog = KategorieDialogEdit()
+
+            val bundle = Bundle()
+            bundle.putInt(KategorieDialogEdit.EXTRA_KATEGORIE, empfangeneKategorie.id)
+            bundle.putString(KategorieDialogEdit.EXTRA_KATEGORIETITEL, empfangeneKategorie.titel)
+            kategorieEditDialog.arguments = bundle
+
+            kategorieEditDialog.show(supportFragmentManager, "Kategorie bearbeiten")
+        }
+
         val btnDeleteKategorie = findViewById<Button>(R.id.btn_DeleteKategorie)
         btnDeleteKategorie.setOnClickListener {
             if (empfangeneKategorie != null) {

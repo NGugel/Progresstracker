@@ -51,6 +51,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return kategorie
     }
 
+
     fun getAllKategorien(): List<Kategorie>? {
         var kategorien: List<Kategorie>? = null
         viewModelScope.launch {

@@ -49,13 +49,17 @@ class AppRepository(application: Application, private val scope: CoroutineScope)
 
     suspend fun getKategorieById(kategorieId:Int):Kategorie?
     {
-        var kategorie:Kategorie? = null
+        var kategorie: Kategorie? = null
         withContext(Dispatchers.IO)
         {
             kategorie = kategorieDao.getKategorieById(kategorieId)
         }
 
         return kategorie
+    }
+
+    fun getLiveDataKategorieById(kategorieId: Int): LiveData<Kategorie?> {
+        return kategorieDao.getLiveDataKategorieById(kategorieId)
     }
 
     suspend fun getAllKategorien():List<Kategorie>?

@@ -29,4 +29,7 @@ interface KategorieDao {
 
     @Query("SELECT * FROM Kategorie")
     fun getLiveDataKategorienList():LiveData<List<Kategorie>>
+
+    @Query("SELECT * FROM Kategorie WHERE id = :kategorieId")
+    fun getLiveDataKategorieById(kategorieId: Int): LiveData<Kategorie?>
 }
