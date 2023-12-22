@@ -17,13 +17,13 @@ import androidx.room.PrimaryKey
 data class Frage(
 
     val kategorieId: Int,
-    val frage: String,
-    val antwortA: String? = null,  // Hier könnten die Antwortmöglichkeiten für Multiple Choice sein
-    val antwortB: String? = null,
-    val antwortC: String? = null,
-    val antwortD: String? = null,
-    val fehlerAntwort: String? = null,
-    val korrekteAntwort: String,  // Hier könnte die korrekte Antwort für andere Typen sein
+    var frage: String,
+    var antwortA: String? = null,  // Hier könnten die Antwortmöglichkeiten für Multiple Choice sein
+    var antwortB: String? = null,
+    var antwortC: String? = null,
+    var antwortD: String? = null,
+    var fehlerAntwort: String? = null,
+    var korrekteAntwort: String,  // Hier könnte die korrekte Antwort für andere Typen sein
     val fragetyp: Fragetyp,
 
     @PrimaryKey(autoGenerate = true)

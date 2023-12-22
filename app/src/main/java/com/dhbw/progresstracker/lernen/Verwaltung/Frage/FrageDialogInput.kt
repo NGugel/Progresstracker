@@ -2,13 +2,11 @@ package com.dhbw.progresstracker.lernen.Verwaltung.Kategorie
 
 import MultipleChoiceFragment
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
@@ -149,23 +147,6 @@ class FrageDialogInput : DialogFragment() {
         }
 
     }
-/*
-    private fun saveData() {
-        if (!TextUtils.isEmpty(binding.dialogEtKategorie.editText?.text.toString())) {
-            viewModel.insert(binding.dialogEtKategorie.editText?.text.toString())
-            Toast.makeText(
-                requireContext(),
-                "Kategorie wurde erfolgreich angelegt",
-                Toast.LENGTH_SHORT
-            ).show()
-            dismiss()
-        } else {
-            Toast.makeText(requireContext(), "Bitte zuerst Kategorie eingeben", Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
- */
 
     override fun onDestroyView() {
         super.onDestroyView()

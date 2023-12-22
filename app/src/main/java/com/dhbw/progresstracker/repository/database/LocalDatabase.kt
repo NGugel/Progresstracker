@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
     entities = [Kategorie::class,
                 Frage::class
                ],
-    version = 8,
+    version = 10,
     exportSchema = false
 )
 
@@ -23,6 +23,9 @@ abstract class LocalDatabase:RoomDatabase() {
 
    abstract val kategorieDao: KategorieDao
    abstract val frageDao: FrageDao
+
+
+   //Erstelle Datenbank Instanz
 
    companion object
    {

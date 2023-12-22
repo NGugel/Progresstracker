@@ -102,21 +102,33 @@ class MultipleChoiceFragment : Fragment() {
         val antwortB = binding.etAntwortB.editText?.text.toString()
         val antwortC = binding.etAntwortC.editText?.text.toString()
         val antwortD = binding.etAntwortD.editText?.text.toString()
-        var korrekteAntwort: String
+        var korrekteAntwort = ""
 
         //Korrekte Antwort
         if(binding.spinner.selectedItemPosition == 0)
         {
             korrekteAntwort = antwortA
+            Log.d("SaveFrage", "Hello World Save Frage: Spinnerpos = ${binding.spinner.selectedItemPosition} und SpinnerItem = ${binding.spinner.selectedItem}")
         }
+
         if(binding.spinner.selectedItemPosition == 1)
         {
             korrekteAntwort = antwortB
+            Log.d("SaveFrage", "Hello World Save Frage: Spinnerpos = ${binding.spinner.selectedItemPosition} und SpinnerItem = ${binding.spinner.selectedItem}")
         }
+
         if(binding.spinner.selectedItemPosition == 2)
         {
             korrekteAntwort = antwortC
-        }else { korrekteAntwort = antwortD}
+            Log.d("SaveFrage", "Hello World Save Frage: Spinnerpos = ${binding.spinner.selectedItemPosition} und SpinnerItem = ${binding.spinner.selectedItem}")
+
+        }
+
+        if(binding.spinner.selectedItemPosition == 3)
+        {
+            korrekteAntwort = antwortD
+            Log.d("SaveFrage", "Hello World Save Frage: Spinnerpos = ${binding.spinner.selectedItemPosition} und SpinnerItem = ${binding.spinner.selectedItem}")
+        }
 
 
         if (frage.isEmpty() || antwortA.isEmpty() || antwortB.isEmpty() || antwortC.isEmpty() || antwortD.isEmpty()) {
@@ -126,7 +138,7 @@ class MultipleChoiceFragment : Fragment() {
             // Hier kannst du die nicht-leeren Eingaben verwenden und speichern
             viewModel.insertFrage(empfangeneKategorieId, frage, antwortA, antwortB, antwortC, antwortD,null, korrekteAntwort, Fragetyp.MULTIPLE_CHOICE)
             Toast.makeText(requireContext(), "Frage wurde erfolgreich gespeichert", Toast.LENGTH_SHORT).show()
-            Log.d("SaveFrage", "Hello World Save Frage:  ${empfangeneKategorieId} und ${frage} ${antwortA}! und ${korrekteAntwort} korrekte An und ${Fragetyp.MULTIPLE_CHOICE}")
+            Log.d("SaveFrage", "Hello World Save Frage: KategorieID ${empfangeneKategorieId} und MeineFrage: ${frage} AntwortA: ${antwortA} AntwortB: ${antwortB} AntwortC: ${antwortC} AntwortD: ${antwortD} Korrekte Antwort: ${korrekteAntwort} und Fragetyp: ${Fragetyp.MULTIPLE_CHOICE}")
         }
     }
 }

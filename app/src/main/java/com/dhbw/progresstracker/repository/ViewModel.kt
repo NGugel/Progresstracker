@@ -1,6 +1,7 @@
 package com.dhbw.progresstracker.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -77,9 +78,18 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
             val frage = Frage(kategorieId, question, antwortA, antwortB, antwortC, antwortD,fehlerAntwort, korrekteAntwort, fragetyp)
             repository.insertFrage(frage)
         }
+    }
 
+    fun deleteFrage(frage: Frage){
+        viewModelScope.launch {
+            repository.deleteFrage(frage)
+        }
+    }
 
-
+    fun updateFrage(frage: Frage){
+        viewModelScope.launch {
+            repository.updateFrage(frage)
+        }
     }
 
     private val filteredKategorieId = MutableLiveData<Int>()
@@ -93,6 +103,21 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getLiveDataFragenByKategorie(kategorieId: Int) {
         filteredKategorieId.value = kategorieId
+    }
+
+    fun getFrageById(frageId: Int): Frage?{
+        var frage: Frage? = null
+        viewModelScope.launch {
+            try {
+                frage = repository.getFrageById(frageId)
+                Log.d("ViewModel", "Frage geladen: ${frage?.frage}")
+
+            } catch (e: Exception) {
+
+                Log.e("ViewModel", "Fehler beim Laden der Frage", e)
+            }
+        }
+        return frage
     }
 
 

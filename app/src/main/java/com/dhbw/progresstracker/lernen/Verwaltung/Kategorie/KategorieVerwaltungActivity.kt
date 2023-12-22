@@ -1,6 +1,5 @@
 package com.dhbw.progresstracker.lernen.Verwaltung.Kategorie
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.ActivityKategorieverwaltungBinding
-import com.dhbw.progresstracker.databinding.ActivityVerwaltungBinding
+import com.dhbw.progresstracker.lernen.Verwaltung.Frage.EditFehlertextDialog
+import com.dhbw.progresstracker.lernen.Verwaltung.Frage.EditFreitextDialog
+import com.dhbw.progresstracker.lernen.Verwaltung.Frage.EditMultipleChoiceDialog
 import com.dhbw.progresstracker.lernen.Verwaltung.Frage.FrageAdapter
 import com.dhbw.progresstracker.lernen.Verwaltung.VerwaltungsModusActivity
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.database.Frage
+import com.dhbw.progresstracker.repository.database.Fragetyp
 import com.dhbw.progresstracker.repository.database.Kategorie
 
 
@@ -111,12 +113,32 @@ class KategorieVerwaltungActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(selectedFrage: Frage) {
-        // Implementiere hier die Logik für den Klick auf ein Element
-        // Zum Beispiel: Öffne einen neuen Bildschirm mit den Details der ausgewählten Kategorie
-        Log.d("VerwaltenActivity", "Hello World von OnItemClick, Recyclerview ClickListener - die Kategorie heißt:  ${selectedFrage.frage}!")
-       // val intent = Intent(this, KategorieVerwaltungActivity::class.java)
-        //intent.putExtra("KATEGORIE_KEY", selectedFrage)
-       // startActivity(intent)
+
+        Log.d("KategorieActivity", "Hello World von OnItemClick, Recyclerview ClickListener - die Frage heißt:  ${selectedFrage.frage}!")
+
+        when(selectedFrage.fragetyp) {
+
+            Fragetyp.MULTIPLE_CHOICE -> {
+                val editMultipleChoiceDialog = EditMultipleChoiceDialog(selectedFrage)
+
+                editMultipleChoiceDialog.show(supportFragmentManager, "Edit MultipleChoice Frage")
+
+            }
+            Fragetyp.FREITEXT -> {
+                val editFreitextDialog = EditFreitextDialog(selectedFrage)
+
+                editFreitextDialog.show(supportFragmentManager, "Edit Freitext Frage")
+
+            }
+
+            Fragetyp.FEHLERTEXT -> {
+                val editFehlertextDialog = EditFehlertextDialog(selectedFrage)
+
+                editFehlertextDialog.show(supportFragmentManager, "Edit Freitext Frage")
+            }
+
+        }
+
     }
 
 
