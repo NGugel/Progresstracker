@@ -9,12 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.ActivityAuswahlBinding
-import com.dhbw.progresstracker.databinding.ActivityVerwaltungBinding
 import com.dhbw.progresstracker.lernen.LernenActivity
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.FrageDialogInput
 import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.KategorieAdapter
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.KategorieDialogInput
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.KategorieVerwaltungActivity
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.database.Kategorie
 
@@ -72,8 +68,6 @@ class KategorieAuswahlActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(selectedKategorie: Kategorie) {
-        // Implementiere hier die Logik für den Klick auf ein Element
-        // Zum Beispiel: Öffne einen neuen Bildschirm mit den Details der ausgewählten Kategorie
         Log.d(
             "KategorieAuswahl",
             "Hello World von OnItemClick, Recyclerview ClickListener - die Kategorie heißt:  ${selectedKategorie.titel}!"

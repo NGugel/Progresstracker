@@ -35,25 +35,14 @@ class KategorieVerwaltungActivity : AppCompatActivity() {
         initRecyclerView()
 
         // Lese die übergebene Kategorie aus den Intent-Extras aus
-        //val kategorie = intent.getParcelableExtra<Kategorie>(EXTRA_KATEGORIE)
         val empfangeneKategorie: Kategorie? = intent.getParcelableExtra("KATEGORIE_KEY")
         Log.d("VerwaltenActivity", "Hello World von KategorieVerwalungActivity die übergebene Kategorie heißt:  ${empfangeneKategorie?.titel}!")
-
-        binding?.kategorieVerwaltungsTitel?.text = "Lernen" + System.getProperty("line.separator") +
-                                                    " > " + "${ empfangeneKategorie?.titel}"
-
-        // Jetzt kannst du die ausgewählte Kategorie in dieser Aktivität verwenden
-        // ...
 
         viewModel = ViewModelProvider(this).get(ViewModel::class.java)
 
         viewModel.filteredFragen.observe(this, Observer { fragen ->
-            // Update your UI with the filtered list of Fragen
-
             Log.d("VerwaltenActivity", "Hello World von FragenLiveDataObserver")
             adapter?.updateContent(ArrayList(fragen))
-            // The 'fragen' variable now contains the filtered list
-            // You can do whatever you need to do with this list
         })
 
         // Trigger the filtering by calling getLiveDataFragenByKategorie with the desired kategorieId

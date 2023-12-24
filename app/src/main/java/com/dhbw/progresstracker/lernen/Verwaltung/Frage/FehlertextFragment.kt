@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.databinding.FragmentFehlertextBinding
-import com.dhbw.progresstracker.databinding.FragmentFreitextBinding
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
 import com.dhbw.progresstracker.repository.database.Fragetyp
@@ -85,7 +84,7 @@ class FehlertextFragment: Fragment() {
             // Zeige Toast-Meldung für leere Felder
             Toast.makeText(requireContext(), "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show()
         } else {
-            // Hier kannst du die nicht-leeren Eingaben verwenden und speichern
+            // Die nicht-leeren Eingaben verwenden und speichern
             viewModel.insertFrage(empfangeneKategorieId, frage, null, null, null, null,fehlerAntwort, korrekteAntwort, Fragetyp.FEHLERTEXT)
             Toast.makeText(requireContext(), "Frage wurde erfolgreich gespeichert", Toast.LENGTH_SHORT).show()
             Log.d("Freitextfragment", "Hello World von FreitextFragnent!! Frage wurde gespeichert:  ${empfangeneKategorieId} und ${frage}  und ${fehlerAntwort} korrekt:  ${korrekteAntwort} korrekte An und ${Fragetyp.FEHLERTEXT}")

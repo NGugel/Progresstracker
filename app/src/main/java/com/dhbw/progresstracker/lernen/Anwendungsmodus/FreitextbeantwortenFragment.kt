@@ -5,17 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.databinding.FragmentFreitextBeantwortenBinding
-import com.dhbw.progresstracker.databinding.FragmentFreitextBinding
-import com.dhbw.progresstracker.repository.ViewModel
-import com.dhbw.progresstracker.repository.ViewModelFactory
 import com.dhbw.progresstracker.repository.database.Frage
-import com.dhbw.progresstracker.repository.database.Fragetyp
 
 
 

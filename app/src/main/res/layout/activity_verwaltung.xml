@@ -5,6 +5,7 @@
     android:id="@+id/verwaltungLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#c3c3c3"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".lernen.LernenActivity">
@@ -12,14 +13,14 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/zurueckbutton"
-        android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
-        android:hint="Zurück"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_back"
+        android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
+        android:hint="Zurück"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/verwaltungsTitel"
@@ -34,10 +35,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:text="Progresstracker \n > Lernen"
+        android:text="Kategorien anlegen"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/zurueckbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/zurueckbutton"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,13 +66,13 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnAddKategorie"
-        android:contentDescription="Hier kann man eine Neue Kategorie hinzufügen"
-        android:hint="Kategorie anlegen"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_add"
+        android:contentDescription="Hier kann man eine Neue Kategorie hinzufügen"
+        android:hint="Kategorie anlegen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

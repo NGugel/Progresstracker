@@ -7,16 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.R
-import com.dhbw.progresstracker.databinding.DialogFrageinputBinding
 import com.dhbw.progresstracker.databinding.DialogFragenanzahlBinding
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.FrageDialogInput
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.KategorieVerwaltungActivity
 import com.dhbw.progresstracker.repository.ViewModel
-import kotlin.concurrent.thread
 
 class FrageanzahlDialog : DialogFragment() {
 
@@ -26,7 +23,7 @@ class FrageanzahlDialog : DialogFragment() {
     private var _binding: DialogFragenanzahlBinding? = null
     private val binding get() = _binding!!
 
-    private var myFragenanzahl = 1
+    private var myFragenanzahl = 0
 
     companion object {
         const val EXTRA_KATEGORIE_ID = "extra_kategorie_id"
@@ -90,13 +87,10 @@ class FrageanzahlDialog : DialogFragment() {
         )
 
         viewModel.filteredFragen.observe(this, Observer { fragen ->
-            // Update your UI with the filtered list of Fragen
 
             Log.d("FrageanzahlDialog", "Hello World von FragenLiveDataObserver")
             binding.tvMax.text = fragen.count().toString()
             binding.seekBar.max = fragen.count()
-            // The 'fragen' variable now contains the filtered list
-            // You can do whatever you need to do with this list
         })
 
         //Check ob alle Kategorien oder nur eine Kategorie, fragen anhand dessen anders abfragen
@@ -131,11 +125,21 @@ class FrageanzahlDialog : DialogFragment() {
         //Fragebeantworten starten
 
         binding.dialogBtnStarten.setOnClickListener(){
-            val intent = Intent(activity, FragenbeantwortenActivity::class.java)
-            intent.putExtra("KATEGORIE_KEY", empfangeneKategorieId)
-            intent.putExtra("FRAGENANZAHL", myFragenanzahl)
-            startActivity(intent)
 
+            if(myFragenanzahl == 0)
+            {
+                Toast.makeText(
+                    requireContext(),
+                    "Keine Fragen ausgewählt, falls du noch keine Fragen in dieser Kategorie hast, erstelle zuerst welche.", Toast.LENGTH_LONG).show()
+
+
+            } else {
+
+                val intent = Intent(activity, FragenbeantwortenActivity::class.java)
+                intent.putExtra("KATEGORIE_KEY", empfangeneKategorieId)
+                intent.putExtra("FRAGENANZAHL", myFragenanzahl)
+                startActivity(intent)
+            }
         }
 
         binding.dialogBtnAbbrechen.setOnClickListener(){

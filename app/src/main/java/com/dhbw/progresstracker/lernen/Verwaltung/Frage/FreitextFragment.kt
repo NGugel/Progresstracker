@@ -47,13 +47,7 @@ class FreitextFragment: Fragment() {
                 "MultipleChooiceFragment",
                 "Hello World von MultipleChoiceFragment die übergebene KategorieId heißt:  ${empfangeneKategorieId}!"
             )
-            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
-            // ...
         }
-
-
-
-
 
         btnSave = binding.btnSpeichernFreitext
 
@@ -83,7 +77,7 @@ class FreitextFragment: Fragment() {
             // Zeige Toast-Meldung für leere Felder
             Toast.makeText(requireContext(), "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show()
         } else {
-            // Hier kannst du die nicht-leeren Eingaben verwenden und speichern
+            // Die nicht-leeren Eingaben verwenden und speichern
             viewModel.insertFrage(empfangeneKategorieId, frage, null, null, null, null,null, korrekteAntwort, Fragetyp.FREITEXT)
             Toast.makeText(requireContext(), "Frage wurde erfolgreich gespeichert", Toast.LENGTH_SHORT).show()
             Log.d("Freitextfragment", "Hello World von FreitextFragnent!! Frage wurde gespeichert:  ${empfangeneKategorieId} und ${frage}  und ${korrekteAntwort} korrekte An und ${Fragetyp.FREITEXT}")

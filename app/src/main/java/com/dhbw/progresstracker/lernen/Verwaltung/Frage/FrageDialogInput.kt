@@ -7,30 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Button
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.dhbw.progresstracker.databinding.DialogKategorieinputBinding
-import com.google.android.material.textfield.TextInputLayout
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.DialogFrageinputBinding
 import com.dhbw.progresstracker.lernen.Verwaltung.Frage.FehlertextFragment
 import com.dhbw.progresstracker.lernen.Verwaltung.Frage.FreitextFragment
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
-import com.dhbw.progresstracker.repository.database.Kategorie
 
 class FrageDialogInput : DialogFragment() {
-    private lateinit var rootView: View
-
-    // Views:
-    private lateinit var btnSpeichern: Button
-    private lateinit var btnAbbrechen: Button
-
-    private lateinit var etKategorie: TextInputLayout
 
     // ViewModel
     private lateinit var viewModel: ViewModel
@@ -45,12 +33,6 @@ class FrageDialogInput : DialogFragment() {
     var empfangeneKategorieId: Int = 0
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,8 +44,6 @@ class FrageDialogInput : DialogFragment() {
             empfangeneKategorieId = it.getInt(EXTRA_KATEGORIE)
 
             Log.d("FrageDialogInput", "Hello World von FrageDialgInput die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
-            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
-            // ...
         }
 
         _binding = DialogFrageinputBinding.inflate(inflater, container, false)
@@ -111,12 +91,10 @@ class FrageDialogInput : DialogFragment() {
                         showFragment(fehlertextFragment)
                         Log.d("VerwaltenActivity", "Hello World von showFragment,Spinner 2 Selected! == Fehlertext")
                     }
-                    // Weitere Cases für andere Fragetypen hinzufügen
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Handle when nothing is selected
             }
         }
 

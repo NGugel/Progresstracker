@@ -12,15 +12,15 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/zurueckbutton"
-        android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
-        android:hint="Zurück"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_back"
-        android:textColor="@color/black"
+        android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
+        android:hint="Zurück"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/tvFragencount"
         app:layout_constraintStart_toStartOf="parent"

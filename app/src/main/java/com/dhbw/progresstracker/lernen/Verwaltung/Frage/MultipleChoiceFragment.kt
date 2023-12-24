@@ -3,35 +3,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.dhbw.progresstracker.R
-import com.dhbw.progresstracker.databinding.DialogFrageinputBinding
 import com.dhbw.progresstracker.databinding.FragmentMultiplechoiceBinding
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.FrageDialogInput
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
-import com.dhbw.progresstracker.repository.database.Frage
 import com.dhbw.progresstracker.repository.database.Fragetyp
-import com.dhbw.progresstracker.repository.database.Kategorie
 
 class MultipleChoiceFragment : Fragment() {
 
-    private lateinit var questionEditText: TextInputEditText
-    private lateinit var answerAEditText: TextInputEditText
-    private lateinit var answerBEditText: TextInputEditText
-    private lateinit var answerCEditText: TextInputEditText
-    private lateinit var answerDEditText: TextInputEditText
-    private lateinit var spinner: Spinner
+
     private lateinit var btnSave: Button
-    private lateinit var btnCancel: Button
 
     private var _binding: FragmentMultiplechoiceBinding? = null
     private val binding get() = _binding!!
@@ -55,28 +41,16 @@ class MultipleChoiceFragment : Fragment() {
             empfangeneKategorieId = it.getInt(EXTRA_KATEGORIE)
 
             Log.d("MultipleChooiceFragment", "Hello World von MultipleChoiceFragment die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
-            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
-            // ...
         }
 
         _binding = FragmentMultiplechoiceBinding.inflate(inflater, container, false)
 
-        // Initialisiere die Views
-      //  questionEditText = binding.textInputLayout.editText
-       // answerAEditText = view.findViewById(R.id.etAntwortA.editText)
-        //answerBEditText = view.findViewById(R.id.etAntwortB.editText)
-        //answerCEditText = view.findViewById(R.id.etAntwortC.editText)
-        //answerDEditText = view.findViewById(R.id.etAntwortD)
-        //spinner = view.findViewById(R.id.spinner)
         btnSave = binding.btnSpeichern
 
         // Setze Spinner-Adapter mit den Antwortmöglichkeiten
         val answers = resources.getStringArray(R.array.antworten)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, answers)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-       // spinner.adapter = adapter
-
-        // Setze Click-Listener für die Buttons
 
 
         return binding.root
@@ -135,7 +109,7 @@ class MultipleChoiceFragment : Fragment() {
             // Zeige Toast-Meldung für leere Felder
             Toast.makeText(requireContext(), "Bitte fülle alle Felder aus", Toast.LENGTH_SHORT).show()
         } else {
-            // Hier kannst du die nicht-leeren Eingaben verwenden und speichern
+            // Die nicht-leeren Eingaben verwenden und speichern
             viewModel.insertFrage(empfangeneKategorieId, frage, antwortA, antwortB, antwortC, antwortD,null, korrekteAntwort, Fragetyp.MULTIPLE_CHOICE)
             Toast.makeText(requireContext(), "Frage wurde erfolgreich gespeichert", Toast.LENGTH_SHORT).show()
             Log.d("SaveFrage", "Hello World Save Frage: KategorieID ${empfangeneKategorieId} und MeineFrage: ${frage} AntwortA: ${antwortA} AntwortB: ${antwortB} AntwortC: ${antwortC} AntwortD: ${antwortD} Korrekte Antwort: ${korrekteAntwort} und Fragetyp: ${Fragetyp.MULTIPLE_CHOICE}")

@@ -5,37 +5,21 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.databinding.DialogKategorieinputBinding
-import com.google.android.material.textfield.TextInputLayout
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.ViewModelFactory
 
 class KategorieDialogInput : DialogFragment() {
-    private lateinit var rootView: View
-
-    // Views:
-    private lateinit var btnSpeichern: Button
-    private lateinit var btnAbbrechen: Button
-
-    private lateinit var etKategorie: TextInputLayout
 
     // ViewModel
     private lateinit var viewModel: ViewModel
 
     private var _binding: DialogKategorieinputBinding? = null
     private val binding get() = _binding!!
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,17 +39,11 @@ class KategorieDialogInput : DialogFragment() {
             ViewModelFactory(requireActivity().application)
         ).get(ViewModel::class.java)
 
-        // Hier kannst du auf die Views im Binding-Objekt zugreifen
-        // Beispiel: binding.textViewTitle.text = "Dein Titel"
-
         binding.dialogBtnSpeichern.setOnClickListener {
-            // Aktion bei Klick auf den Speichern-Button
             saveData()
-            // Hier kannst du den Benutzereingabe-Wert verwenden
         }
 
         binding.dialogBtnAbbrechen.setOnClickListener {
-            // Aktion bei Klick auf den Abbrechen-Button
             dismiss() // Schließe den Dialog
         }
     }

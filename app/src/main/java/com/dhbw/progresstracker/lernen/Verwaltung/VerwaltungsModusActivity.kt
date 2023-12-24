@@ -24,18 +24,11 @@ class VerwaltungsModusActivity : AppCompatActivity() {
     private lateinit var adapter: KategorieAdapter
     private lateinit var viewModel: ViewModel
 
-    /*
-        //create Viewmodel
-        private val kategorieViewModel: KategorieViewModel by viewModels {
-            KategorieViewModelFactory((application as Application).repository)
-        }
-        */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("VerwaltungsModusActivity", "Hello World von VerwaltungsmodusActivity!")
 
-        //setContentView(R.layout.activity_verwaltung)
 
         initRecyclerView()
         //ViewModel instanzieren
@@ -48,21 +41,12 @@ class VerwaltungsModusActivity : AppCompatActivity() {
 
         )
 
-        //dieser layoutmanager zuweisung oder direkt im xml unter der recycler view zum anordnen der items
-        //binding?.rvKategorie?.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-
         val btnAddKategorie = findViewById<ImageButton>(R.id.btnAddKategorie)
         btnAddKategorie.setOnClickListener {
             Log.d("VerwaltenActivity", "Hello World von btnAddKategorie!")
             val kategorieDialog = KategorieDialogInput()
             kategorieDialog.show(supportFragmentManager, "Neue Kategorie")
         }
-
-        /* kategorieViewModel.allKategorien.observe(this, Observer { items ->
-             // Update the cached copy of the words in the adapter.
-             adapter.updateContent(ArrayList(items))
-         })*/
-
 
         val zurueckbutton = findViewById<ImageButton>(R.id.zurueckbutton)
 

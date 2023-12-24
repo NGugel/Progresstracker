@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,19 +8,23 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="#c3c3c3"
     tools:context=".lernen.LernenActivity">
+
+
+
 
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/zurueckbutton"
-        android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
-        android:hint="Zurück"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_back"
+        android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
+        android:hint="Zurück"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/kategorieVerwaltungsTitel"
@@ -31,21 +36,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="Lernen \n > "
+        android:text="Fragen anlegen"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/zurueckbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/zurueckbutton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/zurueckbutton" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_RenameKategorie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:layout_marginEnd="16dp"
         android:text="Umbenennen"
         app:layout_constraintEnd_toStartOf="@+id/btn_DeleteKategorie"
@@ -56,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textAllCaps="false"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#F44336"
         android:text="Löschen"

@@ -25,13 +25,6 @@ class EditMultipleChoiceDialog(
 
     private var originalSpinnerPosition = 0
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //setStyle(STYLE_NO_FRAME, R.style.FullScreenDialog)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

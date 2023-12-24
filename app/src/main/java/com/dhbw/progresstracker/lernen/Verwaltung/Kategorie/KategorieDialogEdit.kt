@@ -1,7 +1,6 @@
 package com.dhbw.progresstracker.lernen.Verwaltung.Kategorie
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,8 +43,6 @@ class KategorieDialogEdit : DialogFragment() {
             empfangeneKategorieTitel = it.getString(EXTRA_KATEGORIETITEL).toString()
 
             Log.d("KategorieDialogEdit", "Hello World von KategorieDialogEdit die übergebene KategorieId heißt:  ${empfangeneKategorieId}!")
-            // Jetzt kannst du empfangeneKategorie in diesem Fragment verwenden
-            // ...
         }
 
         _binding = DialogKategorieeditBinding.inflate(inflater, container, false)
@@ -59,9 +56,6 @@ class KategorieDialogEdit : DialogFragment() {
             ViewModelFactory(requireActivity().application)
         ).get(ViewModel::class.java)
 
-        // Hier kannst du auf die Views im Binding-Objekt zugreifen
-        // Beispiel: binding.textViewTitle.text = "Dein Titel"
-
         binding.tvTitle.text = "Kategorie '${empfangeneKategorieTitel}' umbenennen"
         binding.dialogEtKategorie.editText?.setText(empfangeneKategorieTitel)
 
@@ -72,13 +66,10 @@ class KategorieDialogEdit : DialogFragment() {
 
 
         binding.dialogBtnSpeichern.setOnClickListener {
-            // Aktion bei Klick auf den Speichern-Button
             editData()
-            // Hier kannst du den Benutzereingabe-Wert verwenden
         }
 
         binding.dialogBtnAbbrechen.setOnClickListener {
-            // Aktion bei Klick auf den Abbrechen-Button
             dismiss() // Schließe den Dialog
         }
     }

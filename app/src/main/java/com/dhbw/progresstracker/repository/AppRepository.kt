@@ -47,31 +47,6 @@ class AppRepository(application: Application, private val scope: CoroutineScope)
         }
     }
 
-    suspend fun getKategorieById(kategorieId:Int):Kategorie?
-    {
-        var kategorie: Kategorie? = null
-        withContext(Dispatchers.IO)
-        {
-            kategorie = kategorieDao.getKategorieById(kategorieId)
-        }
-
-        return kategorie
-    }
-
-    fun getLiveDataKategorieById(kategorieId: Int): LiveData<Kategorie?> {
-        return kategorieDao.getLiveDataKategorieById(kategorieId)
-    }
-
-    suspend fun getAllKategorien():List<Kategorie>?
-    {
-        var kategorien:List<Kategorie>?  = null
-        withContext(Dispatchers.IO)
-        {
-            kategorien = kategorieDao.getKategorienList()
-        }
-        return kategorien
-    }
-
     fun getLiveDataKategorien(): LiveData<List<Kategorie>> =  kategorieDao.getLiveDataKategorienList()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,25 +75,6 @@ class AppRepository(application: Application, private val scope: CoroutineScope)
         {
             frageDao.deleteFrage(frage)
         }
-    }
-
-    suspend fun getFrageById(frageId: Int): Frage?
-    {
-        var frage: Frage? = null
-
-        withContext(Dispatchers.IO)
-        {
-            frage = frageDao.getFrageById(frageId)
-        }
-        return frage
-    }
-
-    fun getFrageByIdNoSuspend(frageId: Int):Frage?
-    {
-        var frage: Frage? = null
-
-        frage = frageDao.getFrageByIdNoSuspend(frageId)
-        return frage
     }
 
     fun getLiveDataFragen(): LiveData<List<Frage>> = frageDao.getLiveDataFragenList()

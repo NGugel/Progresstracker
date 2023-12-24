@@ -21,6 +21,7 @@
         android:outlineProvider="background"
         android:text="Alle Kategorien"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

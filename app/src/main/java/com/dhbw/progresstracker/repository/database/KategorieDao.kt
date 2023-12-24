@@ -21,12 +21,6 @@ interface KategorieDao {
     @Update
     suspend fun updateKategorie(Kategorie: Kategorie)
 
-    @Query("SELECT * FROM Kategorie WHERE id = :kategorieId")
-    suspend fun getKategorieById(kategorieId:Int): Kategorie
-
-    @Query("SELECT * FROM Kategorie")
-    suspend fun getKategorienList(): List<Kategorie>
-
     @Query("SELECT * FROM Kategorie")
     fun getLiveDataKategorienList():LiveData<List<Kategorie>>
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -13,16 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dhbw.progresstracker.R
 import com.dhbw.progresstracker.databinding.ActivityFragebeantwortenBinding
-import com.dhbw.progresstracker.databinding.ActivityKategorieverwaltungBinding
-import com.dhbw.progresstracker.lernen.LernenActivity
-import com.dhbw.progresstracker.lernen.Verwaltung.Frage.FreitextFragment
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.FrageDialogInput
-import com.dhbw.progresstracker.lernen.Verwaltung.Kategorie.KategorieVerwaltungActivity
 import com.dhbw.progresstracker.repository.ViewModel
 import com.dhbw.progresstracker.repository.database.Frage
 import com.dhbw.progresstracker.repository.database.Fragetyp
-import com.dhbw.progresstracker.repository.database.Kategorie
-import com.dhbw.progresstracker.lernen.Anwendungsmodus.FreitextbeantwortenFragment
 
 class FragenbeantwortenActivity : AppCompatActivity() {
 
@@ -43,7 +35,7 @@ class FragenbeantwortenActivity : AppCompatActivity() {
             override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
                 super.onFragmentDestroyed(fm, f)
 
-                // Hier kannst du auf die Zerstörung des Fragments reagieren
+                // Auf die Zerstörung des Fragments reagieren
                 Log.d("FragenbeantwortenActivity", "Fragment wurde zerstört")
                 zeigeFragenInSchleife()
 
@@ -75,8 +67,6 @@ class FragenbeantwortenActivity : AppCompatActivity() {
         binding?.tvFragencount?.text = "Frage ${fragenCounter} von ${empfangeneFragenanzahl}"
 
 
-        //Interactionlistener Initialisieren
-
         //Alle Kategorien oder nur eine ausgewähl?
         if (empfangeneKategorieId == 0) { // Alle Kategorien
             viewModel.getLiveDataFragen().observe(this, Observer { fragen ->
@@ -98,7 +88,6 @@ class FragenbeantwortenActivity : AppCompatActivity() {
             })
 
             viewModel.getLiveDataFragenByKategorie(empfangeneKategorieId)
-
         }
 
 
@@ -107,7 +96,6 @@ class FragenbeantwortenActivity : AppCompatActivity() {
 
         zurueckbutton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-
         }
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(
@@ -134,7 +122,8 @@ class FragenbeantwortenActivity : AppCompatActivity() {
         if (fragenLeft == 0) {
             Toast.makeText(
                 this,
-                "Super, du bist mit deinen vorgenommenen Fragen durch.",Toast.LENGTH_LONG).show()
+                "Super, du bist mit deinen vorgenommenen Fragen durch.", Toast.LENGTH_LONG
+            ).show()
             startActivity(Intent(this, KategorieAuswahlActivity::class.java))
 
         } else {
@@ -151,15 +140,18 @@ class FragenbeantwortenActivity : AppCompatActivity() {
                     }
 
                     Fragetyp.FEHLERTEXT -> {
-                        val fehlerTextbeantwortenFragment = FehlertextbeantwortenFragment(aktuelleFrage)
+                        val fehlerTextbeantwortenFragment =
+                            FehlertextbeantwortenFragment(aktuelleFrage)
                         showFragment(fehlerTextbeantwortenFragment)
                         Log.d(
                             "Fragebeantworten",
                             "Hello World von FragebeantwortenActivity, Fragment Fehlertext, Aktuelle Frage: ${aktuelleFrage.frage}"
                         )
                     }
+
                     Fragetyp.MULTIPLE_CHOICE -> {
-                        val multipleChoicebeantwortenFragment = MultipleChoicebeantwortenFragment(aktuelleFrage)
+                        val multipleChoicebeantwortenFragment =
+                            MultipleChoicebeantwortenFragment(aktuelleFrage)
                         showFragment(multipleChoicebeantwortenFragment)
                         Log.d(
                             "Fragebeantworten",
