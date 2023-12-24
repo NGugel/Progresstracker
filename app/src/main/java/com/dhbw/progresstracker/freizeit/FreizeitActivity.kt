@@ -58,20 +58,17 @@ class FreizeitActivity : ComponentActivity() {
 
             newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
                 override fun onSwipeLeft() {
-                    // Mülleimer-Icon anzeigen oder Aktion ausführen
                     Log.d("FreizeitActivity", "Swiped left on button $buttonName")
                     // Button editieren mit Confirmationfenster aufrufen
                     showEditConfirmationDialog("Bitte geben Sie einen neuen Namen ein!", newButton, buttonLayout)
                 }
                 override fun onSwipeRight() {
-                    // Mülleimer-Icon anzeigen oder Aktion ausführen
                     Log.d("FreizeitActivity", "Swiped right on button $buttonName")
 
                     // Button entfernen mit Confirmationfenster aufrufen
                     showDeleteConfirmationDialog("Möchten Sie den Button \"" + newButton.text.toString() + "\" wirklich löschen?", newButton)
                 }
                 override fun onTouch() {
-                    // Mülleimer-Icon anzeigen oder Aktion ausführen
                     Log.d("FreizeitActivity", "Touch/Click on button $buttonName")
                     val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
                     val allEntries: Map<String, *> = sharedPreferences.all
@@ -93,6 +90,7 @@ class FreizeitActivity : ComponentActivity() {
         startActivity(intent)
     }
 
+    //Wird fuer den Ladevorgang in abgewandelter Form benoetigt
     private fun createButton(buttonLayout: LinearLayout, width: Int, height: Int, marginTop: Int, buttonName: String) {
         val newButton = Button(this)
         newButton.isAllCaps = false
@@ -109,20 +107,17 @@ class FreizeitActivity : ComponentActivity() {
 
         newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
             override fun onSwipeLeft() {
-                // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Swiped left on button $buttonName")
                 // Button editieren mit Confirmationfenster aufrufen
                 showEditConfirmationDialog("Bitte geben Sie einen neuen Namen ein!", newButton, buttonLayout)
             }
             override fun onSwipeRight() {
-                // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Swiped right on button $buttonName")
 
                 // Button entfernen mit Confirmationfenster aufrufen
                 showDeleteConfirmationDialog("Möchten Sie den Button \"" + newButton.text.toString() + "\" wirklich löschen?", newButton)
             }
             override fun onTouch() {
-                // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("FreizeitActivity", "Touch/Click on button $buttonName")
                 val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
                 val allEntries: Map<String, *> = sharedPreferences.all

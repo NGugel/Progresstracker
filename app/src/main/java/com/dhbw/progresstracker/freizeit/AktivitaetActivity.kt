@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -17,10 +18,13 @@ import androidx.activity.ComponentActivity
 import androidx.core.view.marginTop
 import com.dhbw.progresstracker.MainActivity
 import com.dhbw.progresstracker.R
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AktivitaetActivity : ComponentActivity() {
 
-    val buttonWidthAdjustmentByPixels = -150
+    val buttonWidthAdjustmentByPixels = -0
     var aktivitaetName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,8 @@ class AktivitaetActivity : ComponentActivity() {
         val zurueckbutton = findViewById<Button>(R.id.zurueckbutton)
 
         val addButton = findViewById<Button>(R.id.addButton)
+
+        val viewButton = findViewById<Button>(R.id.viewButton)
 
         val buttonLayout = findViewById<LinearLayout>(R.id.buttonLayout2)
 
@@ -55,15 +61,21 @@ class AktivitaetActivity : ComponentActivity() {
             Log.d("AktivitaetActivity", "Hello World von Addbutton!")
             createButton(buttonLayout, addButton.width + buttonWidthAdjustmentByPixels, addButton.height, addButton.marginTop)
 
-            /*
-            val sharedPreferences = getSharedPreferences("ButtonPrefs", Context.MODE_PRIVATE)
-            val allEntries: Map<String, *> = sharedPreferences.all
+        }
 
+        viewButton.setOnClickListener {
+            Log.d("AktivitaetActivity", "Hello World von Viewbutton!")
+            val sharedPreferences = getSharedPreferences("DataPrefs", Context.MODE_PRIVATE)
+            val allEntries: Map<String, *> = sharedPreferences.all
+            var data = ""
+            Log.d("SharedPreferences", "DataPrefs Key Values")
             for ((key, value) in allEntries) {
                 Log.d("SharedPreferences", "$key: $value")
-            }*/
-
+                data = "$data$key: $value \n"
+            }
+            showInfoDialog(data)
         }
+
     }
 
     private fun createButton(buttonLayout: LinearLayout, width: Int, height: Int, marginTop: Int) {
@@ -83,28 +95,34 @@ class AktivitaetActivity : ComponentActivity() {
 
             newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
                 override fun onSwipeLeft() {
-                    // Mülleimer-Icon anzeigen oder Aktion ausführen
                     Log.d("AktivitaetActivity", "Swiped left on button $buttonName")
                     // Button editieren mit Confirmationfenster aufrufen
                     showEditConfirmationDialog("Bitte geben Sie einen neuen Namen ein!", newButton, buttonLayout)
                 }
                 override fun onSwipeRight() {
-                    // Mülleimer-Icon anzeigen oder Aktion ausführen
                     Log.d("AktivitaetActivity", "Swiped right on button $buttonName")
 
                     // Button entfernen mit Confirmationfenster aufrufen
                     showDeleteConfirmationDialog("Möchten Sie den Button \"" + newButton.text.toString() + "\" wirklich löschen?", newButton)
                 }
                 override fun onTouch() {
-                    // Mülleimer-Icon anzeigen oder Aktion ausführen
                     Log.d("AktivitaetActivity", "Touch/Click on button $buttonName")
                     val sharedPreferences = getSharedPreferences("$aktivitaetName", Context.MODE_PRIVATE)
                     val allEntries: Map<String, *> = sharedPreferences.all
 
                     for ((key, value) in allEntries) {
+                        Log.d("SharedPreferences", sharedPreferences.toString())
                         Log.d("SharedPreferences", "$key: $value")
                     }
-                    //showAddDataAsStringDialog("Speichern Sie Ergebnisse!", newButton)
+                    showAddDataAsStringDialog("Speichern Sie Ergebnisse!", newButton)
+                    val newButtonName = newButton.text.toString()
+                    val sharedPreferences2 = getSharedPreferences("$newButtonName", Context.MODE_PRIVATE)
+                    val allEntries2: Map<String, *> = sharedPreferences2.all
+
+                    for ((key, value) in allEntries2) {
+                        Log.d("SharedPreferences", sharedPreferences2.toString())
+                        Log.d("SharedPreferences", "$key: $value")
+                    }
                 }
             })
 
@@ -112,6 +130,7 @@ class AktivitaetActivity : ComponentActivity() {
         }
     }
 
+    //Wird fuer den Ladevorgang in abgewandelter Form benoetigt
     private fun createButton(buttonLayout: LinearLayout, width: Int, height: Int, marginTop: Int, buttonName: String) {
         val newButton = Button(this)
         newButton.isAllCaps = false
@@ -128,28 +147,34 @@ class AktivitaetActivity : ComponentActivity() {
 
         newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
             override fun onSwipeLeft() {
-                // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("AktivitaetActivity", "Swiped left on button $buttonName")
                 // Button editieren mit Confirmationfenster aufrufen
                 showEditConfirmationDialog("Bitte geben Sie einen neuen Namen ein!", newButton, buttonLayout)
             }
             override fun onSwipeRight() {
-                // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("AktivitaetActivity", "Swiped right on button $buttonName")
 
                 // Button entfernen mit Confirmationfenster aufrufen
                 showDeleteConfirmationDialog("Möchten Sie den Button \"" + newButton.text.toString() + "\" wirklich löschen?", newButton)
             }
             override fun onTouch() {
-                // Mülleimer-Icon anzeigen oder Aktion ausführen
                 Log.d("AktivitaetActivity", "Touch/Click on button $buttonName")
                 val sharedPreferences = getSharedPreferences("$aktivitaetName", Context.MODE_PRIVATE)
                 val allEntries: Map<String, *> = sharedPreferences.all
 
                 for ((key, value) in allEntries) {
+                    Log.d("SharedPreferences", sharedPreferences.toString())
                     Log.d("SharedPreferences", "$key: $value")
                 }
-                //showAddDataAsStringDialog("Speichern Sie Ergebnisse!", newButton)
+                showAddDataAsStringDialog("Speichern Sie Ergebnisse!", newButton)
+                val newButtonName = newButton.text.toString()
+                val sharedPreferences2 = getSharedPreferences("$newButtonName", Context.MODE_PRIVATE)
+                val allEntries2: Map<String, *> = sharedPreferences2.all
+
+                for ((key, value) in allEntries2) {
+                    Log.d("SharedPreferences", sharedPreferences2.toString())
+                    Log.d("SharedPreferences", "$key: $value")
+                }
             }
         })
 
@@ -226,9 +251,16 @@ class AktivitaetActivity : ComponentActivity() {
     }
 
     private fun saveData(value: String, buttonName: String) {
-        val sharedPreferences = getSharedPreferences("$aktivitaetName", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("DataPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString(buttonName, value)
+        val currentDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDateTime.now()
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val formattedDateTime = currentDate.format(formatter)
+        editor.putString("$buttonName => $formattedDateTime", value)
         editor.apply()
     }
 
@@ -272,6 +304,19 @@ class AktivitaetActivity : ComponentActivity() {
         val editor = sharedPreferences.edit()
         editor.remove(button.text.toString())
         editor.apply()
+        // Entfernen der gespeicherten Daten einer Aktivitaet
+        val buttonName = button.text.toString()
+        val sharedPreferences2 = getSharedPreferences("DataPrefs", Context.MODE_PRIVATE)
+        val editor2 = sharedPreferences2.edit()
+        val allEntries: Map<String, *> = sharedPreferences2.all
+        for ((key, value) in allEntries) {
+            var keyString = "$key"
+            var keyStringFirstPart = keyString.split(" => ").first()
+            if(keyStringFirstPart.equals(buttonName)) {
+                editor2.remove(key)
+            }
+        }
+        editor2.apply()
     }
 
     private fun editButton(button: Button, newButtonName: String, buttonLayout: LinearLayout) {
