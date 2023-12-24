@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/test_herbstbild" />
+        android:src="@drawable/progresstracker_hintergrundbild" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -46,7 +46,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:background="@drawable/test_fruehlingsbild"
+            android:background="@drawable/lernen_icon_farbig"
             android:scaleType="centerCrop"
             android:text="Lernen"
             android:textColor="@color/black"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/test_sommerbild"
+            android:background="@drawable/freizeit_icon_farbig"
             android:scaleType="centerCrop"
             android:text="Freizeit"
             android:textColor="@color/black"

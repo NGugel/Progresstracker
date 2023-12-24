@@ -78,7 +78,7 @@ class AktivitaetActivity : ComponentActivity() {
             )
             val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
             layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
-            newButton.setBackgroundResource(R.drawable.test_herbstbild)
+            newButton.setBackgroundResource(R.drawable.bearbeiten_und_delete_icon_farbig_variation)
             buttonLayout.addView(newButton, buttonLayout.childCount - 1)
 
             newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
@@ -104,6 +104,7 @@ class AktivitaetActivity : ComponentActivity() {
                     for ((key, value) in allEntries) {
                         Log.d("SharedPreferences", "$key: $value")
                     }
+                    //showAddDataAsStringDialog("Speichern Sie Ergebnisse!", newButton)
                 }
             })
 
@@ -122,7 +123,7 @@ class AktivitaetActivity : ComponentActivity() {
         )
         val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
         layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
-        newButton.setBackgroundResource(R.drawable.test_herbstbild)
+        newButton.setBackgroundResource(R.drawable.bearbeiten_und_delete_icon_farbig_variation)
         buttonLayout.addView(newButton, buttonLayout.childCount - 1)
 
         newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
@@ -148,6 +149,7 @@ class AktivitaetActivity : ComponentActivity() {
                 for ((key, value) in allEntries) {
                     Log.d("SharedPreferences", "$key: $value")
                 }
+                //showAddDataAsStringDialog("Speichern Sie Ergebnisse!", newButton)
             }
         })
 
@@ -208,6 +210,26 @@ class AktivitaetActivity : ComponentActivity() {
         }
         editBuilder.setNegativeButton("Abbrechen", null)
         editBuilder.show()
+    }
+
+    private fun showAddDataAsStringDialog(message: String, newButton: Button) {
+        val editBuilder = AlertDialog.Builder(this)
+        editBuilder.setTitle(message)
+        val input = EditText(this)
+        editBuilder.setView(input)
+        editBuilder.setPositiveButton("OK") { _, _ ->
+            val value = input.text.toString()
+            saveData(value, newButton.text.toString())
+        }
+        editBuilder.setNegativeButton("Abbrechen", null)
+        editBuilder.show()
+    }
+
+    private fun saveData(value: String, buttonName: String) {
+        val sharedPreferences = getSharedPreferences("$aktivitaetName", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString(buttonName, value)
+        editor.apply()
     }
 
     private fun isButtonSaved(buttonName: String): Boolean {

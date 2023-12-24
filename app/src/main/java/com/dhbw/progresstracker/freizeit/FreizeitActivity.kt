@@ -53,7 +53,7 @@ class FreizeitActivity : ComponentActivity() {
             )
             val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
             layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
-            newButton.setBackgroundResource(R.drawable.test_herbstbild)
+            newButton.setBackgroundResource(R.drawable.bearbeiten_und_delete_icon_farbig)
             buttonLayout.addView(newButton, buttonLayout.childCount - 1)
 
             newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
@@ -104,7 +104,7 @@ class FreizeitActivity : ComponentActivity() {
         )
         val layoutParams = newButton.layoutParams as LinearLayout.LayoutParams
         layoutParams.setMargins(0, marginTop, 0, 0) // Abstand zwischen den Buttons festlegen
-        newButton.setBackgroundResource(R.drawable.test_herbstbild)
+        newButton.setBackgroundResource(R.drawable.bearbeiten_und_delete_icon_farbig)
         buttonLayout.addView(newButton, buttonLayout.childCount - 1)
 
         newButton.setOnTouchListener(object : OnSwipeTouchListener(this) {
