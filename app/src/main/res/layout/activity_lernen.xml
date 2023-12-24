@@ -29,13 +29,13 @@
 
         <Button
             android:id="@+id/zurueckbutton"
-            android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
-            android:hint="Zurück"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:background="@drawable/zurueck_icon"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/ic_back"
+            android:contentDescription="Das ist der  Zurückbutton hier kommt man zum letzten Screen"
+            android:hint="Zurück"
             android:text=" "
             android:textColor="@color/black"
             android:textStyle="bold"

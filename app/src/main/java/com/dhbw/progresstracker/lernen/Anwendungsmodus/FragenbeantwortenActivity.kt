@@ -29,9 +29,11 @@ class FragenbeantwortenActivity : AppCompatActivity() {
 
     var currentFragment: Fragment? = null
 
+    //Auf die anzuzeigenden Fragen (Fragmente) Events reagieren.
 
     private val myFragmentLifecycleCallbacks =
         object : FragmentManager.FragmentLifecycleCallbacks() {
+            //Wenn Fragment zerstört (Frage gelöst oder geskipt), neues anzeigen
             override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
                 super.onFragmentDestroyed(fm, f)
 
@@ -105,6 +107,7 @@ class FragenbeantwortenActivity : AppCompatActivity() {
 
     }
 
+    //Random Frage oder Null Wert bekommen mit .randomOrNull nach Liste
     fun <E> List<E>.randomOrNull(): E? = if (size > 0) random() else null
 
     private fun showFragment(fragment: Fragment) {
@@ -128,7 +131,7 @@ class FragenbeantwortenActivity : AppCompatActivity() {
 
         } else {
             if (aktuelleFrage != null) {
-                // Hier je nach Fragetyp das entsprechende Fragment erstellen und anzeigen
+                // Je nach Fragetyp das entsprechende Fragment erstellen und anzeigen
                 when (aktuelleFrage.fragetyp) {
                     Fragetyp.FREITEXT -> {
                         val freitextbeantwortenFragment = FreitextbeantwortenFragment(aktuelleFrage)
