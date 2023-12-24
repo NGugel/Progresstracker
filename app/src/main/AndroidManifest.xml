@@ -28,6 +28,10 @@
         <activity android:name=".lernen.LernenActivity" />
         <activity android:name=".lernen.Verwaltung.VerwaltungsModusActivity"
                      android:theme="@style/AppTheme"/>
+        <activity android:name=".lernen.Anwendungsmodus.KategorieAuswahlActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".lernen.Anwendungsmodus.FragenbeantwortenActivity"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".freizeit.FreizeitActivity" />
         <activity
             android:name=".freizeit.AktivitaetActivity" />

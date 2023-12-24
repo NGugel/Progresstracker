@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import com.dhbw.progresstracker.MainActivity
 import com.dhbw.progresstracker.R
+import com.dhbw.progresstracker.lernen.Anwendungsmodus.KategorieAuswahlActivity
 import com.dhbw.progresstracker.lernen.Verwaltung.VerwaltungsModusActivity
 
 class LernenActivity : ComponentActivity() {
@@ -32,6 +33,7 @@ class LernenActivity : ComponentActivity() {
 
         anwendungsbutton.setOnClickListener {
             Log.d("LernenAcitivity", "Hello World von Anwendungsbutton!")
+            startActivity(Intent(this, KategorieAuswahlActivity::class.java))
         }
     }
 }

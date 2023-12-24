@@ -113,6 +113,17 @@ class AppRepository(application: Application, private val scope: CoroutineScope)
         return frage
     }
 
-    fun getLiveDataFragen(kategorieId: Int): LiveData<List<Frage>> =  frageDao.getLiveDataFragenForKategorie(kategorieId)
+    fun getFrageByIdNoSuspend(frageId: Int):Frage?
+    {
+        var frage: Frage? = null
+
+        frage = frageDao.getFrageByIdNoSuspend(frageId)
+        return frage
+    }
+
+    fun getLiveDataFragen(): LiveData<List<Frage>> = frageDao.getLiveDataFragenList()
+
+
+    fun getLiveDataFragenForKategorie(kategorieId: Int): LiveData<List<Frage>> =  frageDao.getLiveDataFragenForKategorie(kategorieId)
 
 }

@@ -22,8 +22,14 @@ interface FrageDao {
     @Query("SELECT * FROM Frage WHERE id = :frageId")
     suspend fun getFrageById(frageId:Int): Frage
 
+    @Query("SELECT * FROM Frage WHERE id = :frageId")
+    fun getFrageByIdNoSuspend(frageId:Int): Frage
+
     @Query("SELECT * FROM Frage WHERE kategorieId = :kategorieId")
     suspend fun getFragenForKategorie(kategorieId: Int): List<Frage>
+
+    @Query("SELECT * FROM Frage")
+    fun getLiveDataFragenList():LiveData<List<Frage>>
 
     @Query("SELECT * FROM Frage WHERE kategorieId = :kategorieId")
     fun getLiveDataFragenForKategorie(kategorieId: Int): LiveData<List<Frage>>

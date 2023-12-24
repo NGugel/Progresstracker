@@ -20,6 +20,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     // Repository
     private val repository = AppRepository(application, viewModelScope)
     private var liveDataKategorien = repository.getLiveDataKategorien()
+    private var liveDataFragen = repository.getLiveDataFragen()
     ////////////////////////////////////////////////////////////////
 
     //////////////////////////////////////////////////////////////
@@ -92,11 +93,19 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun getFrageByIdNoSuspend(frageId: Int): Frage? {
+        var myFrage: Frage? = null
+
+        myFrage = repository.getFrageByIdNoSuspend(frageId)
+
+        return myFrage
+    }
+
     private val filteredKategorieId = MutableLiveData<Int>()
 
     // LiveData to observe filtered Fragen
     val filteredFragen: LiveData<List<Frage>> = filteredKategorieId.switchMap { kategorieId ->
-        repository.getLiveDataFragen(kategorieId)
+        repository.getLiveDataFragenForKategorie(kategorieId)
     }
 
     // ... Other code ...
@@ -120,16 +129,19 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return frage
     }
 
+    fun getLiveDataFragen(): LiveData<List<Frage>> = liveDataFragen
 
-  /* val id: Int = 0,
-    val kategorieId: Int,
-    val frage: String,
-    val antwortA: String? = null,  // Hier könnten die Antwortmöglichkeiten für Multiple Choice sein
-    val antwortB: String? = null,
-    val antwortC: String? = null,
-    val antwortD: String? = null,
-    val korrekteAntwort: String? = null,  // Hier könnte die korrekte Antwort für andere Typen sein
-    val fragetyp: Fragetyp
-*/
+
+
+    /* val id: Int = 0,
+      val kategorieId: Int,
+      val frage: String,
+      val antwortA: String? = null,  // Hier könnten die Antwortmöglichkeiten für Multiple Choice sein
+      val antwortB: String? = null,
+      val antwortC: String? = null,
+      val antwortD: String? = null,
+      val korrekteAntwort: String? = null,  // Hier könnte die korrekte Antwort für andere Typen sein
+      val fragetyp: Fragetyp
+  */
 
 }
